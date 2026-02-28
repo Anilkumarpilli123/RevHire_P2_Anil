@@ -1,5 +1,7 @@
 package com.rev.app.rest;
 
+import com.rev.app.dto.JwtResponse;
+import com.rev.app.dto.UserDto;
 import com.rev.app.entity.User;
 import com.rev.app.mapper.UserMapper;
 import com.rev.app.service.AuthService;
