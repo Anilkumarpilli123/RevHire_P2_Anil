@@ -11,7 +11,7 @@ import com.rev.app.repository.EmployerRepository;
 import com.rev.app.repository.JobSeekerRepository;
 import com.rev.app.repository.UserRepository;
 import com.rev.app.service.AuthService;
-import com.rev.app.service.IAuthService;
+//import com.rev.app.service.IAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

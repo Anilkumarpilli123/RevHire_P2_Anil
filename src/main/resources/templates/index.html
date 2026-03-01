@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevHire - Connect & Hire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f97316;
+            --secondary: #fbbf24;
+            --dark: #09090b;
+            --glass: RGBA(255, 255, 255, 0.03);
+            --glass-border: RGBA(255, 255, 255, 0.12);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #09090b 0%, #1c1917 50%, #431407 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: var(--glass);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 10%;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white !important;
+            box-shadow: 0 4px 15px RGBA(249, 115, 22, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px RGBA(249, 115, 22, 0.5);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--glass-border);
+            color: white;
+            background: var(--glass);
+            margin-left: 1rem;
+        }
+
+        .glass-card {
+            background: RGBA(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+        }
+
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            background: RGBA(249, 115, 22, 0.08);
+            top: -100px;
+            left: -100px;
+        }
+
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            background: RGBA(251, 191, 36, 0.08);
+            bottom: -50px;
+            right: -50px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="circle circle-1"></div>
+<div class="circle circle-2"></div>
+
+<nav class="navbar">
+    <div class="logo">RevHire</div>
+    <div class="nav-links">
+        <a href="/jobs">Browse Jobs</a>
+        <a href="/login" class="btn btn-outline">Login</a>
+        <a href="/register" class="btn btn-primary">Sign Up</a>
+    </div>
+</nav>
+
+<main class="hero">
+    <h1>Find Your Dream Job <br>With RevHire</h1>
+    <p>The next-generation career portal connecting top talent with industry-leading companies using advanced
+        matching algorithms.</p>
+    <div class="cta-btns">
+        <a href="/register" class="btn btn-primary">Get Started</a>
+        <a href="/login" class="btn btn-outline">Talent Login</a>
+    </div>
+
+    <div class="glass-card">
+        <div class="feature-item">
+            <h3>Smart Matching</h3>
+            <p>Advanced filters search by skills, experience, and location.</p>
+        </div>
+        <div class="feature-item">
+            <h3>One-Click Apply</h3>
+            <p>Apply to jobs instantly with your saved resume profile.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Real-time Alerts</h3>
+            <p>Get notified as soon as recruitment starts for your roles.</p>
+        </div>
+    </div>
+</main>
+</body>
+
+</html>
