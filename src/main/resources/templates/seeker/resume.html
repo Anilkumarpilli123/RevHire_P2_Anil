@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Resume | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid var(--glass-border);
+            padding: 2rem;
+        }
+
+        .main-content {
+            padding: 3rem;
+            overflow-y: auto;
+        }
+
+        .resume-form {
+            max-width: 800px;
+        }
+
+        .section-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <h2 class="logo"
+            style="background: linear-gradient(to right, #6366f1, #a855f7);-webkit-background-clip: text;-webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+            RevHire</h2>
+        <nav style="margin-top: 2rem;">
+            <a href="/seeker/dashboard"
+               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
+            <a href="/seeker/profile"
+               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
+            <a href="/seeker/jobs"
+               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Browse Jobs</a>
+            <a href="/seeker/applications"
+               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
+            <a href="/seeker/resume"
+               style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">My
+                Resume</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div th:if="${param.success}" class="alert alert-success"
+             style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+            Resume and profile updated successfully!
+        </div>
+        <div th:if="${param.error}" class="alert alert-error"
+             style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+            <p th:text="${param.error[0]}">Error message</p>
+        </div>
+
+        <form th:action="@{/seeker/resume}" th:object="${resume}" method="post" enctype="multipart/form-data"
+              class="resume-form">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="section-card">
+                <h3 class="section-header">Professional Objective</h3>
+                <div class="form-group">
+                        <textarea th:field="*{objective}" class="form-control"
+                                  placeholder="Brief summary of your career goals..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-header">Education</h3>
+                <div class="form-group">
+                        <textarea th:field="*{education}" class="form-control"
+                                  placeholder="Degrees, institutions, and dates..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-header">Work Experience</h3>
+                <div class="form-group">
+                        <textarea th:field="*{experience}" class="form-control"
+                                  placeholder="Previous roles, companies, and achievements..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-header">Skills & Competencies</h3>
+                <div class="form-group">
+                        <textarea th:field="*{skills}" class="form-control"
+                                  placeholder="List your technical and soft skills..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-header">Projects</h3>
+                <div class="form-group">
+                        <textarea th:field="*{projects}" class="form-control"
+                                  placeholder="Notable projects, links, and impact..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-header">Certifications</h3>
+                <div class="form-group">
+                        <textarea th:field="*{certifications}" class="form-control"
+                                  placeholder="Professional certifications and licenses..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h3 class="section-header">Upload Formatted Resume (PDF/DOCX)</h3>
+                <div class="form-group">
+                    <input type="file" name="resumeFile" class="form-control" accept=".pdf,.docx">
+
+                    <div th:if="${resume.resumePath != null}"
+                         style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <span style="font-size: 1.5rem;">📄</span>
+                            <span style="color: #94a3b8; font-size: 0.9rem;">Formatted Resume Uploaded</span>
+                        </div>
+                        <a th:href="${resume.resumePath}" target="_blank" class="btn btn-outline"
+                           style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">View Current Resume</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1.5rem; margin-bottom: 5rem;">
+                <button type="submit" class="btn btn-primary" style="flex: 2;">Save Profiles & Resume</button>
+                <a href="/seeker/dashboard" class="btn btn-outline"
+                   style="flex: 1; border: 1px solid var(--glass-border); text-align: center; line-height: 1; padding: 0.8rem; text-decoration: none; color: white;">Cancel</a>
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+
+</html>
