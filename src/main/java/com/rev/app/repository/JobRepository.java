@@ -11,21 +11,21 @@ import java.util.List;
 @Repository
 public interface JobRepository extends JpaRepository<Job, Integer> {
 
-    @Query("SELECT j FROM Job j WHERE " +
-            "(:title IS NULL OR LOWER(j.title) LIKE LOWER(CONCAT('%', :title, '%'))) AND " +
-            "(:location IS NULL OR LOWER(j.location) LIKE LOWER(CONCAT('%', :location, '%'))) AND " +
-            "(:skills IS NULL OR LOWER(j.skillsRequired) LIKE LOWER(CONCAT('%', :skills, '%'))) AND " +
-            "(:experience IS NULL OR j.experienceRequired <= :experience) AND " +
-            "(:companyName IS NULL OR LOWER(j.company.name) LIKE LOWER(CONCAT('%', :companyName, '%'))) AND "
-            +
-            "(:jobType IS NULL OR LOWER(j.jobType) = LOWER(:jobType)) AND " +
-            "(j.status = 'OPEN')")
-    List<Job> searchJobs(@Param("title") String title,
-                         @Param("location") String location,
-                         @Param("skills") String skills,
-                         @Param("experience") Integer experience,
-                         @Param("companyName") String companyName,
-                         @Param("jobType") String jobType);
+        @Query("SELECT j FROM Job j WHERE " +
+                        "(:title IS NULL OR LOWER(j.title) LIKE LOWER(CONCAT('%', :title, '%'))) AND " +
+                        "(:location IS NULL OR LOWER(j.location) LIKE LOWER(CONCAT('%', :location, '%'))) AND " +
+                        "(:skills IS NULL OR LOWER(j.skillsRequired) LIKE LOWER(CONCAT('%', :skills, '%'))) AND " +
+                        "(:experience IS NULL OR j.experienceRequired <= :experience) AND " +
+                        "(:companyName IS NULL OR LOWER(j.company.name) LIKE LOWER(CONCAT('%', :companyName, '%'))) AND "
+                        +
+                        "(:jobType IS NULL OR LOWER(j.jobType) = LOWER(:jobType)) AND " +
+                        "(j.status = 'OPEN')")
+        List<Job> searchJobs(@Param("title") String title,
+                        @Param("location") String location,
+                        @Param("skills") String skills,
+                        @Param("experience") Integer experience,
+                        @Param("companyName") String companyName,
+                        @Param("jobType") String jobType);
 
-    List<Job> findByCompany_Id(int companyId);
+        List<Job> findByCompany_Id(int companyId);
 }

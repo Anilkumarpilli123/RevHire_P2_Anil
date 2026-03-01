@@ -35,7 +35,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Job> searchJobs(String title, String location, String skills, Integer experience, String companyName,
-                                String jobType) {
+            String jobType) {
         return jobRepository.searchJobs(title, location, skills, experience, companyName, jobType);
     }
 

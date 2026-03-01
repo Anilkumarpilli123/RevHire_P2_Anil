@@ -172,11 +172,11 @@ public class SeekerController {
 
     @GetMapping("/jobs")
     public String browseJobs(Model model, Authentication auth,
-                             @RequestParam(required = false) String title,
-                             @RequestParam(required = false) String location,
-                             @RequestParam(required = false) String companyName,
-                             @RequestParam(required = false) String jobType,
-                             @RequestParam(required = false) Integer experience) {
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String companyName,
+            @RequestParam(required = false) String jobType,
+            @RequestParam(required = false) Integer experience) {
 
         User user = userRepository.findByEmail(auth.getName()).get();
         JobSeekerProfile profile = getOrCreateProfile(user);
@@ -221,8 +221,8 @@ public class SeekerController {
 
     @PostMapping("/resume")
     public String updateResume(@ModelAttribute Resume resume,
-                               @RequestParam(value = "resumeFile", required = false) MultipartFile file,
-                               Authentication auth) {
+            @RequestParam(value = "resumeFile", required = false) MultipartFile file,
+            Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();
         JobSeekerProfile profile = getOrCreateProfile(user);
 
@@ -260,7 +260,7 @@ public class SeekerController {
 
     @PostMapping("/jobs/{id}/favorite")
     public String toggleFavorite(@PathVariable int id, Authentication auth,
-                                 @RequestParam(required = false) String redirect) {
+            @RequestParam(required = false) String redirect) {
         User user = userRepository.findByEmail(auth.getName()).get();
         jobService.toggleFavorite(user, id);
         return "redirect:" + (redirect != null ? redirect : "/seeker/jobs");
@@ -297,7 +297,7 @@ public class SeekerController {
 
     @PostMapping("/jobs/apply/{id}")
     public String applyForJob(@PathVariable int id, @RequestParam(required = false) String coverLetter,
-                              Authentication auth) {
+            Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();
         JobSeekerProfile profile = jobSeekerService.getProfileByUser(user);
         if (!profile.isComplete()) {

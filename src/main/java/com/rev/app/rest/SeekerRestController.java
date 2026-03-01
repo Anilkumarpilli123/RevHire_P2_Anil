@@ -67,7 +67,7 @@ public class SeekerRestController {
 
     @PutMapping("/profile")
     public ResponseEntity<ApiResponse<JobSeekerProfileDto>> updateProfile(Authentication auth,
-                                                                          @RequestBody JobSeekerProfile profile) {
+            @RequestBody JobSeekerProfile profile) {
         User user = userRepository.findByEmail(auth.getName()).get();
         JobSeekerProfile existing = jobSeekerService.getProfileByUser(user);
         profile.setId(existing.getId());

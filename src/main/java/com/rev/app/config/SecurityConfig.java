@@ -76,10 +76,10 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .permitAll())
                 .headers(headers -> headers
-                                .cacheControl(cache -> cache.disable()) // Explicitly disable Spring's default to add custom one
-                        // if needed, or just let Spring's default work but
-                        // usually and historically explicit is better for "back
-                        // button"
+                        .cacheControl(cache -> cache.disable()) // Explicitly disable Spring's default to add custom one
+                                                                // if needed, or just let Spring's default work but
+                                                                // usually and historically explicit is better for "back
+                                                                // button"
                 );
 
         return http.build();

@@ -93,15 +93,15 @@ public class EmployerController {
 
     @PostMapping("/profile")
     public String saveProfile(@RequestParam String name,
-                              @RequestParam String industry,
-                              @RequestParam String description,
-                              @RequestParam String website,
-                              @RequestParam String location,
-                              @RequestParam(required = false) String personalName,
-                              @RequestParam(required = false) String personalPhone,
-                              @RequestParam(required = false) String personalLocation,
-                              @RequestParam(required = false) String jobRole,
-                              Authentication auth) {
+            @RequestParam String industry,
+            @RequestParam String description,
+            @RequestParam String website,
+            @RequestParam String location,
+            @RequestParam(required = false) String personalName,
+            @RequestParam(required = false) String personalPhone,
+            @RequestParam(required = false) String personalLocation,
+            @RequestParam(required = false) String jobRole,
+            Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();
         EmployerProfile profile = employerService.getProfileByUser(user);
 
@@ -190,8 +190,8 @@ public class EmployerController {
 
     @PostMapping("/applications/{applicationId}/status")
     public String updateApplicationStatus(@PathVariable int applicationId,
-                                          @RequestParam String status,
-                                          @RequestParam(required = false) String notes) {
+            @RequestParam String status,
+            @RequestParam(required = false) String notes) {
         System.out.println("DEBUG: updateApplicationStatus hit for app=" + applicationId + ", status=" + status);
         Application app = applicationService.updateStatus(applicationId, status, notes);
         return "redirect:/employer/applicants/" + app.getJob().getId() + "?success=status_updated";

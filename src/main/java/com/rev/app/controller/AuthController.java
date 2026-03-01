@@ -39,7 +39,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("signupRequest") SignupRequest signupRequest,
-                               BindingResult result, Model model) {
+            BindingResult result, Model model) {
         logger.info("Registration attempt for email: {}, role: {}", signupRequest.getEmail(), signupRequest.getRole());
         if (result.hasErrors()) {
             logger.warn("Validation errors: {}", result.getAllErrors());

@@ -67,110 +67,110 @@
 </head>
 
 <body>
-<div class="container">
-    <aside class="sidebar">
-        <h2 class="logo"
-            style="background: linear-gradient(to right, #6366f1, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
-            RevHire</h2>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo"
+                style="background: linear-gradient(to right, #6366f1, #a855f7); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+                RevHire</h2>
 
-        <div class="profile-summary">
-            <div class="avatar"
-                 th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'E'}">
-                E</div>
-            <div>
-                <h4 th:text="${profile != null and profile.name != null ? profile.name : 'Recruiter'}">Recruiter
-                </h4>
-                <p style="font-size: 0.8rem; color: #94a3b8;"
-                   th:text="${currentUser != null ? currentUser.email : 'No Email'}">employer@example.com</p>
-            </div>
-        </div>
-
-        <nav style="margin-top: 1rem;">
-            <a href="/employer/dashboard"
-               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
-            <a href="/employer/jobs/new"
-               style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Post
-                a Job</a>
-            <a href="/employer/profile"
-               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
-        </nav>
-        <div style="margin-top: auto;">
-            <a href="/logout" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Sign Out</a>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <h1>Create Job Opportunity</h1>
-        <p style="color: #94a3b8; margin-bottom: 3rem;">Publish a new role to find the best talent for your team.
-        </p>
-
-        <form th:action="@{/employer/jobs}" th:object="${job}" method="post" style="max-width: 900px;">
-            <div class="section-card">
-                <div class="form-group">
-                    <label>Job Title</label>
-                    <input type="text" th:field="*{title}" class="form-control"
-                           placeholder="e.g. Senior Software Engineer" required>
-                </div>
-                <div class="form-group">
-                    <label>Job Description</label>
-                    <textarea th:field="*{description}" class="form-control"
-                              placeholder="Describe the role, responsibilities, and team..." required></textarea>
+            <div class="profile-summary">
+                <div class="avatar"
+                    th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'E'}">
+                    E</div>
+                <div>
+                    <h4 th:text="${profile != null and profile.name != null ? profile.name : 'Recruiter'}">Recruiter
+                    </h4>
+                    <p style="font-size: 0.8rem; color: #94a3b8;"
+                        th:text="${currentUser != null ? currentUser.email : 'No Email'}">employer@example.com</p>
                 </div>
             </div>
 
-            <div class="section-card">
-                <div class="grid-2">
+            <nav style="margin-top: 1rem;">
+                <a href="/employer/dashboard"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
+                <a href="/employer/jobs/new"
+                    style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Post
+                    a Job</a>
+                <a href="/employer/profile"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
+            </nav>
+            <div style="margin-top: auto;">
+                <a href="/logout" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Sign Out</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1>Create Job Opportunity</h1>
+            <p style="color: #94a3b8; margin-bottom: 3rem;">Publish a new role to find the best talent for your team.
+            </p>
+
+            <form th:action="@{/employer/jobs}" th:object="${job}" method="post" style="max-width: 900px;">
+                <div class="section-card">
                     <div class="form-group">
-                        <label>Location</label>
-                        <input type="text" th:field="*{location}" class="form-control"
-                               placeholder="e.g. Remote, San Francisco" required>
+                        <label>Job Title</label>
+                        <input type="text" th:field="*{title}" class="form-control"
+                            placeholder="e.g. Senior Software Engineer" required>
                     </div>
                     <div class="form-group">
-                        <label>Job Type</label>
-                        <select th:field="*{jobType}" class="form-control">
-                            <option value="FULL_TIME">Full Time</option>
-                            <option value="PART_TIME">Part Time</option>
-                            <option value="CONTRACT">Contract</option>
-                            <option value="INTERNSHIP">Internship</option>
-                            <option value="REMOTE">Remote</option>
-                        </select>
+                        <label>Job Description</label>
+                        <textarea th:field="*{description}" class="form-control"
+                            placeholder="Describe the role, responsibilities, and team..." required></textarea>
                     </div>
                 </div>
-                <div class="grid-2">
-                    <div class="form-group">
-                        <label>Salary Range</label>
-                        <input type="text" th:field="*{salaryRange}" class="form-control"
-                               placeholder="e.g. $100k - $130k">
-                    </div>
-                    <div class="form-group">
-                        <label>Experience Required (Years)</label>
-                        <input type="number" th:field="*{experienceRequired}" class="form-control"
-                               placeholder="e.g. 5" required>
-                    </div>
-                </div>
-            </div>
 
-            <div class="section-card">
-                <div class="form-group">
-                    <label>Required Skills (comma separated)</label>
-                    <input type="text" th:field="*{skillsRequired}" class="form-control"
-                           placeholder="e.g. Java, Python, AWS" required>
+                <div class="section-card">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" th:field="*{location}" class="form-control"
+                                placeholder="e.g. Remote, San Francisco" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Job Type</label>
+                            <select th:field="*{jobType}" class="form-control">
+                                <option value="FULL_TIME">Full Time</option>
+                                <option value="PART_TIME">Part Time</option>
+                                <option value="CONTRACT">Contract</option>
+                                <option value="INTERNSHIP">Internship</option>
+                                <option value="REMOTE">Remote</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Salary Range</label>
+                            <input type="text" th:field="*{salaryRange}" class="form-control"
+                                placeholder="e.g. $100k - $130k">
+                        </div>
+                        <div class="form-group">
+                            <label>Experience Required (Years)</label>
+                            <input type="number" th:field="*{experienceRequired}" class="form-control"
+                                placeholder="e.g. 5" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group" style="margin-bottom: 0;">
-                    <label>Education Requirements</label>
-                    <input type="text" th:field="*{educationRequired}" class="form-control"
-                           placeholder="e.g. Bachelor's in CS">
-                </div>
-            </div>
 
-            <div style="display: flex; gap: 1.5rem; margin-bottom: 5rem;">
-                <button type="submit" class="btn btn-primary" style="flex: 2;">Post This Job</button>
-                <a href="/employer/dashboard" class="btn btn-outline"
-                   style="flex: 1; border: 1px solid var(--glass-border); text-align: center; line-height: 1; padding: 0.8rem; text-decoration: none; color: white;">Cancel</a>
-            </div>
-        </form>
-    </main>
-</div>
+                <div class="section-card">
+                    <div class="form-group">
+                        <label>Required Skills (comma separated)</label>
+                        <input type="text" th:field="*{skillsRequired}" class="form-control"
+                            placeholder="e.g. Java, Python, AWS" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Education Requirements</label>
+                        <input type="text" th:field="*{educationRequired}" class="form-control"
+                            placeholder="e.g. Bachelor's in CS">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.5rem; margin-bottom: 5rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">Post This Job</button>
+                    <a href="/employer/dashboard" class="btn btn-outline"
+                        style="flex: 1; border: 1px solid var(--glass-border); text-align: center; line-height: 1; padding: 0.8rem; text-decoration: none; color: white;">Cancel</a>
+                </div>
+            </form>
+        </main>
+    </div>
 </body>
 
 </html>

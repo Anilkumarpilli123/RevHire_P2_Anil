@@ -37,56 +37,56 @@
 </head>
 
 <body>
-<div class="container">
-    <aside class="sidebar">
-        <h2 class="logo"
-            style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
-            RevHire</h2>
-        <nav style="margin-top: 2rem;">
-            <a href="/seeker/dashboard"
-               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
-            <a href="/seeker/profile"
-               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
-            <a href="/seeker/jobs"
-               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Browse Jobs</a>
-            <a href="/seeker/favorites"
-               style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Saved
-                Jobs</a>
-            <a href="/seeker/applications"
-               style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
-        </nav>
-    </aside>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo"
+                style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+                RevHire</h2>
+            <nav style="margin-top: 2rem;">
+                <a href="/seeker/dashboard"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
+                <a href="/seeker/profile"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
+                <a href="/seeker/jobs"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Browse Jobs</a>
+                <a href="/seeker/favorites"
+                    style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Saved
+                    Jobs</a>
+                <a href="/seeker/applications"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
+            </nav>
+        </aside>
 
-    <main class="main-content">
-        <h1>Your Saved Jobs</h1>
-        <p style="color: #94a3b8; margin-bottom: 3rem;">Opportunities you're keeping an eye on.</p>
+        <main class="main-content">
+            <h1>Your Saved Jobs</h1>
+            <p style="color: #94a3b8; margin-bottom: 3rem;">Opportunities you're keeping an eye on.</p>
 
-        <div th:each="fav : ${favorites}" class="job-card">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: white;" th:text="${fav.job.title}">Job
-                        Title</div>
-                    <div style="color: var(--primary); font-weight: 600;" th:text="${fav.job.company.name}">Company
+            <div th:each="fav : ${favorites}" class="job-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: white;" th:text="${fav.job.title}">Job
+                            Title</div>
+                        <div style="color: var(--primary); font-weight: 600;" th:text="${fav.job.company.name}">Company
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
-                <form th:action="@{'/seeker/jobs/' + ${fav.job.id} + '/favorite'}" method="post">
-                    <input type="hidden" name="redirect" value="/seeker/favorites">
-                    <button type="submit" class="btn btn-outline"
+                <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <form th:action="@{'/seeker/jobs/' + ${fav.job.id} + '/favorite'}" method="post">
+                        <input type="hidden" name="redirect" value="/seeker/favorites">
+                        <button type="submit" class="btn btn-outline"
                             style="width: auto; color: var(--error); border-color: var(--error);">Remove</button>
-                </form>
-                <a th:href="@{'/seeker/jobs/' + ${fav.job.id}}" class="btn btn-primary" style="width: auto;">View
-                    Details</a>
+                    </form>
+                    <a th:href="@{'/seeker/jobs/' + ${fav.job.id}}" class="btn btn-primary" style="width: auto;">View
+                        Details</a>
+                </div>
             </div>
-        </div>
 
-        <div th:if="${favorites.empty}" style="text-align: center; padding: 4rem;">
-            <p style="color: #94a3b8;">No saved jobs yet.</p>
-            <a href="/seeker/jobs" class="btn btn-primary" style="margin-top: 1rem; width: auto;">Browse Jobs</a>
-        </div>
-    </main>
-</div>
+            <div th:if="${favorites.empty}" style="text-align: center; padding: 4rem;">
+                <p style="color: #94a3b8;">No saved jobs yet.</p>
+                <a href="/seeker/jobs" class="btn btn-primary" style="margin-top: 1rem; width: auto;">Browse Jobs</a>
+            </div>
+        </main>
+    </div>
 </body>
 
 </html>

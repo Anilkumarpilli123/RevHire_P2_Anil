@@ -2,153 +2,153 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Details | RevHire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-  <style>
-    .container {
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
 
-    .sidebar {
-        background: rgba(255, 255, 255, 0.03);
-        border-right: 1px solid var(--glass-border);
-        padding: 2rem;
-    }
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid var(--glass-border);
+            padding: 2rem;
+        }
 
-    .main-content {
-        padding: 3rem;
-        overflow-y: auto;
-    }
+        .main-content {
+            padding: 3rem;
+            overflow-y: auto;
+        }
 
-    .job-detail-card {
-        background: var(--glass-heavy);
-        border: 1px solid var(--glass-border);
-        border-radius: 24px;
-        padding: 3rem;
-    }
+        .job-detail-card {
+            background: var(--glass-heavy);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+        }
 
-    .meta-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: #94a3b8;
-        margin-bottom: 0.5rem;
-    }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
 
-    .section-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 2rem 0 1rem 0;
-        color: white;
-    }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: white;
+        }
 
-    .apply-box {
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid var(--primary);
-        border-radius: 16px;
-        padding: 2rem;
-        margin-top: 3rem;
-    }
-  </style>
+        .apply-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
 
 <body>
-<div class="container">
-  <aside class="sidebar">
-    <h2 class="logo"
-        style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
-      RevHire</h2>
-    <nav style="margin-top: 2rem;">
-      <a href="/seeker/dashboard"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
-      <a href="/seeker/profile"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
-      <a href="/seeker/jobs"
-         style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Browse
-        Jobs</a>
-      <a href="/seeker/applications"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
-      <a href="/seeker/resume"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Resume</a>
-    </nav>
-  </aside>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo"
+                style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+                RevHire</h2>
+            <nav style="margin-top: 2rem;">
+                <a href="/seeker/dashboard"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
+                <a href="/seeker/profile"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
+                <a href="/seeker/jobs"
+                    style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Browse
+                    Jobs</a>
+                <a href="/seeker/applications"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
+                <a href="/seeker/resume"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Resume</a>
+            </nav>
+        </aside>
 
-  <main class="main-content">
-    <div class="job-detail-card">
-      <div
-              style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
-        <div>
-          <h1 th:text="${job.title}">Senior Software Engineer</h1>
-          <h3 style="color: var(--primary); margin-top: 0.5rem;" th:text="${job.company.name}">TechCorp
-            Inc.</h3>
-          <div style="display: flex; gap: 2rem; margin-top: 1rem;">
-            <div class="meta-item">
-              <span th:text="${job.location}">Remote</span>
+        <main class="main-content">
+            <div class="job-detail-card">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+                    <div>
+                        <h1 th:text="${job.title}">Senior Software Engineer</h1>
+                        <h3 style="color: var(--primary); margin-top: 0.5rem;" th:text="${job.company.name}">TechCorp
+                            Inc.</h3>
+                        <div style="display: flex; gap: 2rem; margin-top: 1rem;">
+                            <div class="meta-item">
+                                <span th:text="${job.location}">Remote</span>
+                            </div>
+                            <div class="meta-item">
+                                <span th:text="${job.jobType}">Full Time</span>
+                            </div>
+                            <div class="meta-item">
+                                <span th:text="${job.salaryRange}">$120k - $150k</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post">
+                            <input type="hidden" name="redirect" th:value="'/seeker/jobs/' + ${job.id}">
+                            <button type="submit" class="btn"
+                                th:classappend="${isFavorited} ? 'btn-primary' : 'btn-outline'" style="width: auto;"
+                                th:text="${isFavorited} ? 'Saved' : 'Save Job'"></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="section-title">Description</div>
+                <div style="color: #cbd5e1; line-height: 1.6;" th:text="${job.description}">
+                    Job description goes here...
+                </div>
+
+                <div class="section-title">Required Skills</div>
+                <div style="color: #cbd5e1; line-height: 1.6;" th:text="${job.skillsRequired}">
+                    Skills requirements go here...
+                </div>
+
+                <div class="section-title">Education requirements</div>
+                <div style="color: #cbd5e1; line-height: 1.6;" th:text="${job.educationRequired}">
+                    Education requirements go here...
+                </div>
+
+                <div class="apply-box">
+                    <div th:if="${alreadyApplied}" style="text-align: center;">
+                        <h3 style="color: var(--success); margin-bottom: 0.5rem;">Already Applied</h3>
+                        <p style="color: #94a3b8;">You have already submitted an application for this position.</p>
+                        <a href="/seeker/applications" class="btn btn-primary"
+                            style="display: inline-block; width: auto; margin-top: 1rem;">View Status</a>
+                    </div>
+
+                    <div th:if="${!alreadyApplied}">
+                        <h3>Apply for this position</h3>
+                        <p style="color: #94a3b8; margin-bottom: 1.5rem;">Submit your application below. Your latest
+                            resume will be attached automatically.</p>
+                        <form th:action="@{'/seeker/jobs/apply/' + ${job.id}}" method="post">
+                            <div class="form-group">
+                                <label>Cover Letter (Optional)</label>
+                                <textarea name="coverLetter" class="form-control" rows="5"
+                                    placeholder="Tell us why you're a great fit..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"
+                                style="width: auto; padding: 0.8rem 3rem;">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="meta-item">
-              <span th:text="${job.jobType}">Full Time</span>
-            </div>
-            <div class="meta-item">
-              <span th:text="${job.salaryRange}">$120k - $150k</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post">
-            <input type="hidden" name="redirect" th:value="'/seeker/jobs/' + ${job.id}">
-            <button type="submit" class="btn"
-                    th:classappend="${isFavorited} ? 'btn-primary' : 'btn-outline'" style="width: auto;"
-                    th:text="${isFavorited} ? 'Saved' : 'Save Job'"></button>
-          </form>
-        </div>
-      </div>
-
-      <div class="section-title">Description</div>
-      <div style="color: #cbd5e1; line-height: 1.6;" th:text="${job.description}">
-        Job description goes here...
-      </div>
-
-      <div class="section-title">Required Skills</div>
-      <div style="color: #cbd5e1; line-height: 1.6;" th:text="${job.skillsRequired}">
-        Skills requirements go here...
-      </div>
-
-      <div class="section-title">Education requirements</div>
-      <div style="color: #cbd5e1; line-height: 1.6;" th:text="${job.educationRequired}">
-        Education requirements go here...
-      </div>
-
-      <div class="apply-box">
-        <div th:if="${alreadyApplied}" style="text-align: center;">
-          <h3 style="color: var(--success); margin-bottom: 0.5rem;">Already Applied</h3>
-          <p style="color: #94a3b8;">You have already submitted an application for this position.</p>
-          <a href="/seeker/applications" class="btn btn-primary"
-             style="display: inline-block; width: auto; margin-top: 1rem;">View Status</a>
-        </div>
-
-        <div th:if="${!alreadyApplied}">
-          <h3>Apply for this position</h3>
-          <p style="color: #94a3b8; margin-bottom: 1.5rem;">Submit your application below. Your latest
-            resume will be attached automatically.</p>
-          <form th:action="@{'/seeker/jobs/apply/' + ${job.id}}" method="post">
-            <div class="form-group">
-              <label>Cover Letter (Optional)</label>
-              <textarea name="coverLetter" class="form-control" rows="5"
-                        placeholder="Tell us why you're a great fit..."></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary"
-                    style="width: auto; padding: 0.8rem 3rem;">Submit Application</button>
-          </form>
-        </div>
-      </div>
+        </main>
     </div>
-  </main>
-</div>
 </body>
 
 </html>

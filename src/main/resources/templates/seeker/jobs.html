@@ -2,195 +2,195 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Jobs | RevHire</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" th:href="@{/css/style.css}">
-  <style>
-    .container {
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Jobs | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
 
-    .sidebar {
-        background: rgba(255, 255, 255, 0.03);
-        border-right: 1px solid var(--glass-border);
-        padding: 2rem;
-    }
+        .sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border-right: 1px solid var(--glass-border);
+            padding: 2rem;
+        }
 
-    .main-content {
-        padding: 3rem;
-        overflow-y: auto;
-    }
+        .main-content {
+            padding: 3rem;
+            overflow-y: auto;
+        }
 
-    .search-bar {
-        background: var(--glass-heavy);
-        padding: 2rem;
-        border-radius: 24px;
-        margin-bottom: 3rem;
-        display: flex;
-        gap: 1rem;
-        align-items: flex-end;
-    }
+        .search-bar {
+            background: var(--glass-heavy);
+            padding: 2rem;
+            border-radius: 24px;
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
 
-    .job-card {
-        background: var(--glass);
-        border: 1px solid var(--glass-border);
-        border-radius: 20px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-        transition: 0.3s;
-        cursor: pointer;
-    }
+        .job-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: 0.3s;
+            cursor: pointer;
+        }
 
-    .job-card:hover {
-        transform: translateY(-5px);
-        background: var(--glass-heavy);
-        border-color: var(--primary);
-    }
+        .job-card:hover {
+            transform: translateY(-5px);
+            background: var(--glass-heavy);
+            border-color: var(--primary);
+        }
 
-    .job-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 1rem;
-    }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
 
-    .job-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: white;
-    }
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
 
-    .company-name {
-        color: var(--primary);
-        font-weight: 600;
-    }
+        .company-name {
+            color: var(--primary);
+            font-weight: 600;
+        }
 
-    .job-meta {
-        display: flex;
-        gap: 1.5rem;
-        color: #94a3b8;
-        font-size: 0.9rem;
-        margin-top: 0.5rem;
-    }
+        .job-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
 
-    .tag {
-        padding: 0.3rem 0.8rem;
-        border-radius: 8px;
-        background: rgba(99, 102, 241, 0.1);
-        color: var(--primary);
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
-  </style>
+        .tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 <body>
-<div class="container">
-  <aside class="sidebar">
-    <h2 class="logo"
-        style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
-      RevHire</h2>
-    <nav style="margin-top: 2rem;">
-      <a href="/seeker/dashboard"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
-      <a href="/seeker/profile"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
-      <a href="/seeker/jobs"
-         style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Browse
-        Jobs</a>
-      <a href="/seeker/applications"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
-      <a href="/seeker/resume"
-         style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Resume</a>
-    </nav>
-  </aside>
+    <div class="container">
+        <aside class="sidebar">
+            <h2 class="logo"
+                style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+                RevHire</h2>
+            <nav style="margin-top: 2rem;">
+                <a href="/seeker/dashboard"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
+                <a href="/seeker/profile"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
+                <a href="/seeker/jobs"
+                    style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Browse
+                    Jobs</a>
+                <a href="/seeker/applications"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
+                <a href="/seeker/resume"
+                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Resume</a>
+            </nav>
+        </aside>
 
-  <main class="main-content">
-    <h1>Browse Opportunities</h1>
-    <p style="color: #94a3b8; margin-bottom: 2rem;">Find the perfect match for your skills and career goals.</p>
+        <main class="main-content">
+            <h1>Browse Opportunities</h1>
+            <p style="color: #94a3b8; margin-bottom: 2rem;">Find the perfect match for your skills and career goals.</p>
 
-    <form th:action="@{/seeker/jobs}" method="get" class="search-bar"
-          style="flex-direction: column; align-items: stretch; gap: 1.5rem;">
-      <div style="display: flex; gap: 1rem;">
-        <div style="flex: 2;">
-          <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
-            Title / Keywords</label>
-          <input type="text" name="title" class="form-control" placeholder="e.g. Software Engineer"
-                 th:value="${param.title}">
-        </div>
-        <div style="flex: 1;">
-          <label
-                  style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Location</label>
-          <input type="text" name="location" class="form-control" placeholder="e.g. Remote"
-                 th:value="${param.location}">
-        </div>
-      </div>
-      <div style="display: flex; gap: 1rem;">
-        <div style="flex: 1;">
-          <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Company
-            Name</label>
-          <input type="text" name="companyName" class="form-control" placeholder="e.g. Google"
-                 th:value="${param.companyName}">
-        </div>
-        <div style="flex: 1;">
-          <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
-            Type</label>
-          <select name="jobType" class="form-control">
-            <option value="">All Types</option>
-            <option value="FULL_TIME" th:selected="${param.jobType == 'FULL_TIME'}">Full Time</option>
-            <option value="PART_TIME" th:selected="${param.jobType == 'PART_TIME'}">Part Time</option>
-            <option value="CONTRACT" th:selected="${param.jobType == 'CONTRACT'}">Contract</option>
-            <option value="INTERNSHIP" th:selected="${param.jobType == 'INTERNSHIP'}">Internship
-            </option>
-            <option value="REMOTE" th:selected="${param.jobType == 'REMOTE'}">Remote</option>
-          </select>
-        </div>
-        <div style="flex: 0.5;">
-          <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Max
-            Exp</label>
-          <input type="number" name="experience" class="form-control" placeholder="Years"
-                 th:value="${param.experience}">
-        </div>
-        <button type="submit" class="btn btn-primary"
-                style="width: auto; height: 45px; margin-top: 1.5rem;">Apply Filters</button>
-      </div>
-    </form>
+            <form th:action="@{/seeker/jobs}" method="get" class="search-bar"
+                style="flex-direction: column; align-items: stretch; gap: 1.5rem;">
+                <div style="display: flex; gap: 1rem;">
+                    <div style="flex: 2;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
+                            Title / Keywords</label>
+                        <input type="text" name="title" class="form-control" placeholder="e.g. Software Engineer"
+                            th:value="${param.title}">
+                    </div>
+                    <div style="flex: 1;">
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Location</label>
+                        <input type="text" name="location" class="form-control" placeholder="e.g. Remote"
+                            th:value="${param.location}">
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div style="flex: 1;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Company
+                            Name</label>
+                        <input type="text" name="companyName" class="form-control" placeholder="e.g. Google"
+                            th:value="${param.companyName}">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
+                            Type</label>
+                        <select name="jobType" class="form-control">
+                            <option value="">All Types</option>
+                            <option value="FULL_TIME" th:selected="${param.jobType == 'FULL_TIME'}">Full Time</option>
+                            <option value="PART_TIME" th:selected="${param.jobType == 'PART_TIME'}">Part Time</option>
+                            <option value="CONTRACT" th:selected="${param.jobType == 'CONTRACT'}">Contract</option>
+                            <option value="INTERNSHIP" th:selected="${param.jobType == 'INTERNSHIP'}">Internship
+                            </option>
+                            <option value="REMOTE" th:selected="${param.jobType == 'REMOTE'}">Remote</option>
+                        </select>
+                    </div>
+                    <div style="flex: 0.5;">
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Max
+                            Exp</label>
+                        <input type="number" name="experience" class="form-control" placeholder="Years"
+                            th:value="${param.experience}">
+                    </div>
+                    <button type="submit" class="btn btn-primary"
+                        style="width: auto; height: 45px; margin-top: 1.5rem;">Apply Filters</button>
+                </div>
+            </form>
 
-    <div th:each="job : ${jobs}" class="job-card">
-      <div class="job-header">
-        <div>
-          <div class="job-title" th:text="${job.title}">Senior Developer</div>
-          <div class="company-name" th:text="${job.company.name}">TechCorp Inc.</div>
-        </div>
-        <div class="tag" th:text="${job.jobType}">Full Time</div>
-      </div>
-      <div class="job-meta">
-        <span th:text="${job.location}">Remote</span>
-        <span th:text="${job.experienceRequired + '+ years exp'}">3+ years exp</span>
-        <span th:text="${job.salaryRange}">$120k - $150k</span>
-      </div>
-      <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
-        <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post"
-              style="display: inline;">
-          <button type="submit" class="btn"
-                  th:classappend="${favoriteJobIds != null and favoriteJobIds.contains(job.id)} ? 'btn-primary' : 'btn-outline'"
-                  style="width: auto;"
-                  th:text="${favoriteJobIds != null and favoriteJobIds.contains(job.id)} ? 'Saved' : 'Save'"></button>
-        </form>
-        <a th:href="@{'/seeker/jobs/' + ${job.id}}" class="btn btn-primary" style="width: auto;">View
-          Details</a>
-      </div>
+            <div th:each="job : ${jobs}" class="job-card">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title" th:text="${job.title}">Senior Developer</div>
+                        <div class="company-name" th:text="${job.company.name}">TechCorp Inc.</div>
+                    </div>
+                    <div class="tag" th:text="${job.jobType}">Full Time</div>
+                </div>
+                <div class="job-meta">
+                    <span th:text="${job.location}">Remote</span>
+                    <span th:text="${job.experienceRequired + '+ years exp'}">3+ years exp</span>
+                    <span th:text="${job.salaryRange}">$120k - $150k</span>
+                </div>
+                <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                    <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post"
+                        style="display: inline;">
+                        <button type="submit" class="btn"
+                            th:classappend="${favoriteJobIds != null and favoriteJobIds.contains(job.id)} ? 'btn-primary' : 'btn-outline'"
+                            style="width: auto;"
+                            th:text="${favoriteJobIds != null and favoriteJobIds.contains(job.id)} ? 'Saved' : 'Save'"></button>
+                    </form>
+                    <a th:href="@{'/seeker/jobs/' + ${job.id}}" class="btn btn-primary" style="width: auto;">View
+                        Details</a>
+                </div>
+            </div>
+
+            <div th:if="${jobs.empty}" style="text-align: center; padding: 4rem;">
+                <p style="color: #94a3b8;">No jobs found. Try adjusting your search filters.</p>
+            </div>
+        </main>
     </div>
-
-    <div th:if="${jobs.empty}" style="text-align: center; padding: 4rem;">
-      <p style="color: #94a3b8;">No jobs found. Try adjusting your search filters.</p>
-    </div>
-  </main>
-</div>
 </body>
 
 </html>
