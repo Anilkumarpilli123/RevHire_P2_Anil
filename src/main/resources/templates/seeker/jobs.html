@@ -142,6 +142,14 @@
                     <span th:text="${job.experienceRequired + '+ years exp'}">3+ years exp</span>
                     <span th:text="${job.salaryRange}">$120k - $150k</span>
                 </div>
+                <div class="job-meta" style="margin-top: 0.5rem; color: #cbd5e1;">
+                    <span th:if="${job.deadline != null}">
+                        <i class="far fa-calendar-alt"></i> Deadline: <span th:text="${job.deadline}">2026-12-31</span>
+                    </span>
+                    <span th:if="${job.numberOfOpenings != null}">
+                        <i class="fas fa-users"></i> Openings: <span th:text="${job.numberOfOpenings}">5</span>
+                    </span>
+                </div>
                 <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
                     <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post"
                         style="display: inline;">

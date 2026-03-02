@@ -187,6 +187,8 @@ public class EmployerController {
         existingJob.setExperienceRequired(job.getExperienceRequired());
         existingJob.setSkillsRequired(job.getSkillsRequired());
         existingJob.setEducationRequired(job.getEducationRequired());
+        existingJob.setDeadline(job.getDeadline());
+        existingJob.setNumberOfOpenings(job.getNumberOfOpenings());
 
         jobService.updateJob(existingJob);
         System.out.println("DEBUG: Job updated successfully");

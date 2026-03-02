@@ -76,6 +76,15 @@
                                 <span th:text="${job.salaryRange}">$120k - $150k</span>
                             </div>
                         </div>
+                        <div style="display: flex; gap: 2rem; margin-top: 0.5rem; color: #cbd5e1; font-size: 0.9rem;">
+                            <div th:if="${job.deadline != null}">
+                                <i class="far fa-calendar-alt"></i> Apply Deadline: <span
+                                    th:text="${job.deadline}">2026-12-31</span>
+                            </div>
+                            <div th:if="${job.numberOfOpenings != null}">
+                                <i class="fas fa-users"></i> Openings: <span th:text="${job.numberOfOpenings}">5</span>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post">

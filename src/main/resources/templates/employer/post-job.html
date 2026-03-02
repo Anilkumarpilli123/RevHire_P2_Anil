@@ -77,6 +77,17 @@
                                 placeholder="e.g. 5" required>
                         </div>
                     </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Apply Deadline</label>
+                            <input type="date" th:field="*{deadline}" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Openings</label>
+                            <input type="number" th:field="*{numberOfOpenings}" class="form-control"
+                                placeholder="e.g. 1" min="1" required>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="section-card">
