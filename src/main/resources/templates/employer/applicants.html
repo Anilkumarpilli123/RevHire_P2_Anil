@@ -54,8 +54,10 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
-        <div th:replace="~{common/fragments :: employer-sidebar('')}"></div>
+        <div th:replace="~{common/fragments :: employer-sidebar('applicants')}"></div>
 
         <main class="main-content">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem;">
@@ -165,6 +167,7 @@
             </script>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

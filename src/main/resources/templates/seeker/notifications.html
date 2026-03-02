@@ -8,13 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .main-content {
-            padding: 3rem;
-        }
     </style>
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: seeker-sidebar('notifications')}"></div>
 
@@ -69,6 +68,7 @@
             }
         }
     </script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

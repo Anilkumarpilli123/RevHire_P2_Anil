@@ -17,6 +17,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .status-badge {
@@ -50,6 +52,8 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: seeker-sidebar('applications')}"></div>
 
@@ -94,6 +98,7 @@
             </div>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

@@ -11,8 +11,19 @@
     <style>
         .profile-container {
             max-width: 800px;
-            margin: 4rem auto;
-            padding: 2rem;
+            margin: 2rem auto;
+            padding: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                margin: 1rem auto;
+                padding: 1rem;
+            }
+
+            .glass-container {
+                padding: 1.5rem !important;
+            }
         }
 
         .form-group {
@@ -32,6 +43,10 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <!-- Since this is a standalone page, we might not need the full sidebar, 
+         but we keep the mobile header for brand consistency and potential toggle if we add it later -->
     <div class="profile-container">
         <header style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
             <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'"
@@ -145,7 +160,7 @@
                     </select>
                 </div>
 
-                <div style="margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div class="grid-2">
                     <button type="submit" class="btn btn-primary" id="saveBtn">Save Changes</button>
                     <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'" class="btn"
                         style="text-align: center; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; border-radius: 12px;">Cancel</a>
@@ -261,6 +276,7 @@
             if (savedExp) experienceSelect.value = savedExp;
         }
     </script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

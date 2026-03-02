@@ -35,6 +35,8 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: seeker-sidebar('resume')}"></div>
 
@@ -125,6 +127,7 @@
             </form>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

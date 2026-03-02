@@ -33,6 +33,8 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: employer-sidebar('dashboard')}"></div>
 
@@ -54,7 +56,7 @@
                 <p th:if="${param.success[0] == 'job_updated'}">Job updated successfully!</p>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 4rem;">
+            <div class="stat-grid">
                 <div class="glass-container" style="padding: 2rem; text-align: center;">
                     <h3 style="font-size: 2.5rem; color: var(--primary);" th:text="${jobCount ?: 0}">0</h3>
                     <p style="color: #94a3b8;">Active Postings</p>
@@ -98,6 +100,7 @@
             </div>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

@@ -13,6 +13,8 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: employer-sidebar('notifications')}"></div>
 
@@ -66,6 +68,7 @@
             }
         }
     </script>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

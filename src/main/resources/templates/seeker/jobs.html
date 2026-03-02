@@ -72,6 +72,8 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: seeker-sidebar('jobs')}"></div>
 
@@ -81,28 +83,28 @@
 
             <form th:action="@{/seeker/jobs}" method="get" class="search-bar"
                 style="flex-direction: column; align-items: stretch; gap: 1.5rem;">
-                <div style="display: flex; gap: 1rem;">
-                    <div style="flex: 2;">
+                <div class="dashboard-grid" style="gap: 1.5rem; margin-top: 0;">
+                    <div>
                         <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
                             Title / Keywords</label>
                         <input type="text" name="title" class="form-control" placeholder="e.g. Software Engineer"
                             th:value="${param.title}">
                     </div>
-                    <div style="flex: 1;">
+                    <div>
                         <label
                             style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Location</label>
                         <input type="text" name="location" class="form-control" placeholder="e.g. Remote"
                             th:value="${param.location}">
                     </div>
                 </div>
-                <div style="display: flex; gap: 1rem;">
-                    <div style="flex: 1;">
+                <div class="dashboard-grid" style="gap: 1.5rem; margin-top: 0;">
+                    <div>
                         <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Company
                             Name</label>
                         <input type="text" name="companyName" class="form-control" placeholder="e.g. Google"
                             th:value="${param.companyName}">
                     </div>
-                    <div style="flex: 1;">
+                    <div>
                         <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
                             Type</label>
                         <select name="jobType" class="form-control">
@@ -115,14 +117,15 @@
                             <option value="REMOTE" th:selected="${param.jobType == 'REMOTE'}">Remote</option>
                         </select>
                     </div>
-                    <div style="flex: 0.5;">
-                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Max
-                            Exp</label>
-                        <input type="number" name="experience" class="form-control" placeholder="Years"
-                            th:value="${param.experience}">
+                    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                        <div style="flex: 1;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Max
+                                Exp</label>
+                            <input type="number" name="experience" class="form-control" placeholder="Years"
+                                th:value="${param.experience}">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: auto; height: 45px;">Apply</button>
                     </div>
-                    <button type="submit" class="btn btn-primary"
-                        style="width: auto; height: 45px; margin-top: 1.5rem;">Apply Filters</button>
                 </div>
             </form>
 
@@ -157,6 +160,7 @@
             </div>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

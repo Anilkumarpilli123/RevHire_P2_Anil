@@ -8,22 +8,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 100vh;
-        }
-
-        .main-content {
-            padding: 3rem;
-            overflow-y: auto;
-        }
-
         .job-detail-card {
             background: var(--glass-heavy);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             padding: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .job-detail-card {
+                padding: 1.5rem;
+            }
+
+            .job-detail-card header {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
         }
 
         .meta-item {
@@ -52,13 +52,15 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: seeker-sidebar('jobs')}"></div>
 
         <main class="main-content">
             <div class="job-detail-card">
-                <div
-                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+                <div class="section-card"
+                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; flex-wrap: wrap; gap: 1.5rem;">
                     <div>
                         <h1 th:text="${job.title}">Senior Software Engineer</h1>
                         <h3 style="color: var(--primary); margin-top: 0.5rem;" th:text="${job.company.name}">TechCorp
@@ -126,6 +128,7 @@
             </div>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

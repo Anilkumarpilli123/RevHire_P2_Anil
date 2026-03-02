@@ -28,6 +28,29 @@
             display: flex;
             align-items: flex-end;
             gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .profile-avatar {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+                margin: 0 auto;
+            }
+
+            .profile-info-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin-top: -60px;
+            }
+
+            .contact-grid {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+            }
         }
 
         .profile-avatar {
@@ -143,7 +166,9 @@
 </head>
 
 <body>
-    <div class="container" style="display: block; max-width: 1100px; margin: 0 auto; padding: 2rem;">
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 2rem;">
 
         <header style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
             <a href="/seeker/dashboard"
@@ -196,7 +221,7 @@
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+        <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
             <div class="left-col">
                 <div class="glass-container section-card">
                     <div class="section-header">
@@ -328,6 +353,7 @@
             </div>
         </div>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>

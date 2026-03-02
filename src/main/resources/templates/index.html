@@ -20,11 +20,8 @@
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #09090b 0%, #1c1917 50%, #431407 100%);
             color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            display: block;
             overflow-x: hidden;
-            background-attachment: fixed;
         }
 
         .navbar {
@@ -123,8 +120,40 @@
             max-width: 900px;
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                margin: 0 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .glass-card {
+                padding: 1.5rem;
+            }
+
+            .cta-btns {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .cta-btns .btn {
+                margin: 0;
+                text-align: center;
+            }
         }
 
         .feature-item h3 {

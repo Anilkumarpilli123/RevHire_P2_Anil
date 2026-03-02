@@ -16,12 +16,6 @@
             margin-bottom: 2.5rem;
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-
         textarea.form-control {
             min-height: 120px;
         }
@@ -29,6 +23,8 @@
 </head>
 
 <body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
     <div class="container">
         <div th:replace="~{common/fragments :: employer-sidebar('post-job')}"></div>
 
@@ -104,6 +100,7 @@
             </form>
         </main>
     </div>
+    <script th:src="@{/js/main.js}"></script>
 </body>
 
 </html>
