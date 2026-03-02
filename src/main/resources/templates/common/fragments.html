@@ -15,7 +15,7 @@
             <div class="avatar"
                 th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'J'}">
                 J</div>
-            <div style="margin-top: 0.5rem;">
+            <div>
                 <h4 th:text="${profile != null ? profile.name : 'Job Seeker'}">Job Seeker</h4>
                 <p style="font-size: 0.8rem; color: #94a3b8;"
                     th:text="${currentUser != null ? currentUser.email : 'No Email'}"></p>
