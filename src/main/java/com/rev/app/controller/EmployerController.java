@@ -5,6 +5,7 @@ import com.rev.app.repository.UserRepository;
 import com.rev.app.service.ApplicationService;
 import com.rev.app.service.EmployerService;
 import com.rev.app.service.JobService;
+import com.rev.app.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class EmployerController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @ModelAttribute
     public void addAttributes(Model model, Authentication auth) {
         if (auth != null) {
@@ -38,6 +42,7 @@ public class EmployerController {
                 model.addAttribute("currentUser", user);
                 try {
                     model.addAttribute("profile", employerService.getProfileByUser(user));
+                    model.addAttribute("unreadCount", notificationService.getUnreadCount(user));
                 } catch (Exception e) {
                 }
             }
@@ -208,5 +213,12 @@ public class EmployerController {
         }
         applicationService.bulkUpdateStatus(applicationIds, status, notes);
         return "redirect:/employer/applicants/" + jobId + "?success=bulk_updated";
+    }
+
+    @GetMapping("/notifications")
+    public String viewNotifications(Model model, Authentication auth) {
+        User user = userRepository.findByEmail(auth.getName()).get();
+        model.addAttribute("notifications", notificationService.getNotificationsByUser(user));
+        return "employer/notifications";
     }
 }

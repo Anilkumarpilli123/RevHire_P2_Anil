@@ -1,16 +1,18 @@
 package com.rev.app.controller;
 
 import com.rev.app.entity.Application;
-import com.rev.app.entity.Job;
 import com.rev.app.entity.EmploymentStatus;
+import com.rev.app.entity.FavoriteJob;
+import com.rev.app.entity.Job;
 import com.rev.app.entity.JobSeekerProfile;
-import com.rev.app.entity.*;
+import com.rev.app.entity.Resume;
+import com.rev.app.entity.User;
 import com.rev.app.repository.FavoriteJobRepository;
-import com.rev.app.repository.JobRepository;
 import com.rev.app.repository.UserRepository;
 import com.rev.app.service.ApplicationService;
 import com.rev.app.service.JobSeekerService;
 import com.rev.app.service.JobService;
+import com.rev.app.service.NotificationService;
 import com.rev.app.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -43,6 +45,9 @@ public class SeekerController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @ModelAttribute
     public void addAttributes(Model model, Authentication auth) {
         if (auth != null) {
@@ -51,6 +56,7 @@ public class SeekerController {
                 model.addAttribute("currentUser", user);
                 try {
                     model.addAttribute("profile", getOrCreateProfile(user));
+                    model.addAttribute("unreadCount", notificationService.getUnreadCount(user));
                 } catch (Exception e) {
                 }
             }
@@ -313,6 +319,13 @@ public class SeekerController {
     public String withdrawApplication(@PathVariable int id) {
         applicationService.withdrawApplication(id, "Withdrawn by candidate");
         return "redirect:/seeker/applications?success=withdrawn";
+    }
+
+    @GetMapping("/notifications")
+    public String viewNotifications(Model model, Authentication auth) {
+        User user = userRepository.findByEmail(auth.getName()).get();
+        model.addAttribute("notifications", notificationService.getNotificationsByUser(user));
+        return "seeker/notifications";
     }
 
     private JobSeekerProfile getOrCreateProfile(User user) {

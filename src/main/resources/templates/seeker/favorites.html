@@ -38,24 +38,7 @@
 
 <body>
     <div class="container">
-        <aside class="sidebar">
-            <h2 class="logo"
-                style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
-                RevHire</h2>
-            <nav style="margin-top: 2rem;">
-                <a href="/seeker/dashboard"
-                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Dashboard</a>
-                <a href="/seeker/profile"
-                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Profile</a>
-                <a href="/seeker/jobs"
-                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">Browse Jobs</a>
-                <a href="/seeker/favorites"
-                    style="display: block; padding: 1rem; color: white; text-decoration: none; background: var(--glass-heavy); border-radius: 12px;">Saved
-                    Jobs</a>
-                <a href="/seeker/applications"
-                    style="display: block; padding: 1rem; color: #94a3b8; text-decoration: none;">My Applications</a>
-            </nav>
-        </aside>
+        <div th:replace="~{common/fragments :: seeker-sidebar('favorites')}"></div>
 
         <main class="main-content">
             <h1>Your Saved Jobs</h1>

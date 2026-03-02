@@ -77,49 +77,12 @@
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
-
-        .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <aside class="sidebar">
-            <h2 class="logo"
-                style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
-                RevHire</h2>
-
-            <div class="profile-summary">
-                <div class="avatar"
-                    th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'J'}">
-                    J</div>
-                <div style="margin-top: 0.5rem;">
-                    <h4 th:text="${profile != null ? profile.name : 'Job Seeker'}">John Doe</h4>
-                    <p style="font-size: 0.8rem; color: #94a3b8;"
-                        th:text="${currentUser != null ? currentUser.email : 'No Email'}">john@example.com</p>
-                </div>
-            </div>
-
-            <nav class="sidebar-nav">
-                <a href="/seeker/dashboard" class="active">Dashboard</a>
-                <a href="/seeker/profile">My Profile</a>
-                <a href="/seeker/jobs">Browse Jobs</a>
-                <a href="/seeker/applications">My Applications</a>
-                <a href="/seeker/resume">My Resume</a>
-            </nav>
-
-            <a href="/logout" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Sign Out</a>
-        </aside>
+        <div th:replace="~{common/fragments :: seeker-sidebar('dashboard')}"></div>
 
         <main class="main-content">
             <header>
@@ -136,9 +99,10 @@
                     <h3 th:text="${shortlisted}">0</h3>
                     <p>Shortlisted</p>
                 </div>
-                <div class="glass-container stat-card">
-                    <h3>0</h3>
-                    <p>Real-time Alerts</p>
+                <div class="glass-container stat-card" style="cursor: pointer;"
+                    onclick="window.location.href='/seeker/notifications'">
+                    <h3 th:text="${unreadCount ?: 0}">0</h3>
+                    <p>New Notifications</p>
                 </div>
             </div>
 

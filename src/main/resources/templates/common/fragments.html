@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+</head>
+
+<body>
+
+    <aside th:fragment="seeker-sidebar(activePage)" class="sidebar">
+        <h2 class="logo"
+            style="background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+            RevHire</h2>
+
+        <div class="profile-summary">
+            <div class="avatar"
+                th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'J'}">
+                J</div>
+            <div style="margin-top: 0.5rem;">
+                <h4 th:text="${profile != null ? profile.name : 'Job Seeker'}">Job Seeker</h4>
+                <p style="font-size: 0.8rem; color: #94a3b8;"
+                    th:text="${currentUser != null ? currentUser.email : 'No Email'}"></p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/seeker/dashboard" th:classappend="${activePage == 'dashboard' ? 'active' : ''}">Dashboard</a>
+            <a href="/seeker/profile" th:classappend="${activePage == 'profile' ? 'active' : ''}">My Profile</a>
+            <a href="/seeker/jobs" th:classappend="${activePage == 'jobs' ? 'active' : ''}">Browse Jobs</a>
+            <a href="/seeker/favorites" th:classappend="${activePage == 'favorites' ? 'active' : ''}">Saved Jobs</a>
+            <a href="/seeker/applications" th:classappend="${activePage == 'applications' ? 'active' : ''}">My
+                Applications</a>
+            <a href="/seeker/resume" th:classappend="${activePage == 'resume' ? 'active' : ''}">My Resume</a>
+            <a href="/seeker/notifications" th:classappend="${activePage == 'notifications' ? 'active' : ''}">
+                Notifications <span th:if="${unreadCount > 0}" class="unread-badge" th:text="${unreadCount}">0</span>
+            </a>
+        </nav>
+
+        <a href="/logout" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Sign Out</a>
+    </aside>
+
+    <aside th:fragment="employer-sidebar(activePage)" class="sidebar">
+        <h2 class="logo"
+            style="background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 2rem;">
+            RevHire</h2>
+
+        <div class="profile-summary">
+            <div class="avatar"
+                th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'E'}">
+                E</div>
+            <div>
+                <h4 th:text="${profile != null and profile.name != null ? profile.name : 'Recruiter'}">Recruiter</h4>
+                <p style="font-size: 0.8rem; color: #94a3b8;"
+                    th:text="${currentUser != null ? currentUser.email : 'No Email'}"></p>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/employer/dashboard" th:classappend="${activePage == 'dashboard' ? 'active' : ''}">Dashboard</a>
+            <a href="/employer/jobs/new" th:classappend="${activePage == 'post-job' ? 'active' : ''}">Post a Job</a>
+            <a href="/employer/profile" th:classappend="${activePage == 'profile' ? 'active' : ''}">My Profile</a>
+            <a href="/employer/notifications" th:classappend="${activePage == 'notifications' ? 'active' : ''}">
+                Notifications <span th:if="${unreadCount > 0}" class="unread-badge" th:text="${unreadCount}">0</span>
+            </a>
+        </nav>
+
+        <div style="margin-top: auto;">
+            <a href="/logout" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">Sign Out</a>
+        </div>
+    </aside>
+
+</body>
+
+</html>

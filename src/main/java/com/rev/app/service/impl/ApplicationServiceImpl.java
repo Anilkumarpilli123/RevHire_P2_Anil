@@ -58,7 +58,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             employerRepository.findTopByCompanyId(job.getCompany().getId()).ifPresent(employer -> {
                 System.out.println("DEBUG: Sending notification to employer: " + employer.getUser().getEmail());
                 notificationService.sendNotification(employer.getUser(),
-                        "New application received for " + job.getTitle());
+                        String.format("New application received for %s from %s", job.getTitle(), jobSeeker.getName()));
             });
         }
         return savedApp;
@@ -88,7 +88,10 @@ public class ApplicationServiceImpl implements ApplicationService {
 
         try {
             notificationService.sendNotification(app.getJobSeeker().getUser(),
-                    "Your application status for " + app.getJob().getTitle() + " has been updated to: " + status);
+                    String.format("Your application for %s at %s has been %s",
+                            app.getJob().getTitle(),
+                            app.getJob().getCompany().getName(),
+                            status.toLowerCase()));
             System.out.println("DEBUG: Notification sent to seeker");
         } catch (Exception e) {
             System.out.println("DEBUG: Failed to send notification: " + e.getMessage());
