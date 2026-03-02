@@ -251,6 +251,19 @@ public class SeekerController {
         }
     }
 
+    @PostMapping("/resume/delete")
+    public String deleteResume(Authentication auth) {
+        User user = userRepository.findByEmail(auth.getName()).get();
+        JobSeekerProfile profile = getOrCreateProfile(user);
+        try {
+            resumeService.deleteResume(profile);
+            return "redirect:/seeker/resume?success=resume_deleted";
+        } catch (RuntimeException e) {
+            return "redirect:/seeker/resume?error="
+                    + java.net.URLEncoder.encode(e.getMessage(), java.nio.charset.StandardCharsets.UTF_8);
+        }
+    }
+
     @GetMapping("/applications")
     public String myApplications(Model model, Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();

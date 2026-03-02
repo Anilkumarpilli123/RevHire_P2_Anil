@@ -43,7 +43,9 @@
         <main class="main-content">
             <div th:if="${param.success}" class="alert alert-success"
                 style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
-                Resume and profile updated successfully!
+                <span th:if="${param.success[0] == 'resume_deleted'}">Resume deleted successfully!</span>
+                <span th:unless="${param.success[0] == 'resume_deleted'}">Resume and profile updated
+                    successfully!</span>
             </div>
             <div th:if="${param.error}" class="alert alert-error"
                 style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
@@ -108,13 +110,28 @@
                         <input type="file" name="resumeFile" class="form-control" accept=".pdf,.docx">
 
                         <div th:if="${resume.resumePath != null}"
-                            style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: space-between;">
-                            <div style="display: flex; align-items: center; gap: 0.8rem;">
-                                <span style="font-size: 1.5rem;">📄</span>
-                                <span style="color: #94a3b8; font-size: 0.9rem;">Formatted Resume Uploaded</span>
+                            style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div
+                                    style="width: 45px; height: 45px; background: rgba(99, 102, 241, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    📄
+                                </div>
+                                <div>
+                                    <div style="color: white; font-weight: 600; font-size: 0.95rem;"
+                                        th:text="${resume.originalFilename != null ? resume.originalFilename : 'Formatted Resume'}">
+                                        resume.pdf</div>
+                                    <div style="color: #94a3b8; font-size: 0.8rem;">Uploaded formatted resume</div>
+                                </div>
                             </div>
-                            <a th:href="${resume.resumePath}" target="_blank" class="btn btn-outline"
-                                style="width: auto; padding: 0.5rem 1rem; font-size: 0.8rem;">View Current Resume</a>
+                            <div style="display: flex; gap: 1rem;">
+                                <a th:href="${resume.resumePath}" target="_blank" class="btn"
+                                    style="width: auto; padding: 0.6rem 1.2rem; font-size: 0.85rem; background: var(--success); color: white; border: none;">View
+                                    Current</a>
+
+                                <button type="button" class="btn"
+                                    onclick="if(confirm('Are you sure you want to delete your uploaded resume?')) { document.getElementById('delete-resume-form').submit(); }"
+                                    style="width: auto; padding: 0.6rem 1.2rem; font-size: 0.85rem; background: #ef4444; color: white; border: none;">Delete</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,9 +142,15 @@
                         style="flex: 1; border: 1px solid var(--glass-border); text-align: center; line-height: 1; padding: 0.8rem; text-decoration: none; color: white;">Cancel</a>
                 </div>
             </form>
+
+            <!-- Hidden form for deletion -->
+            <form id="delete-resume-form" th:action="@{/seeker/resume/delete}" method="post" style="display: none;">
+            </form>
         </main>
     </div>
     <script th:src="@{/js/main.js}"></script>
 </body>
+
+</html>
 
 </html>

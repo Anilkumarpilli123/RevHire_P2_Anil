@@ -65,11 +65,33 @@ public class ResumeServiceImpl implements ResumeService {
 
             // Store the relative web path
             resume.setResumePath("/resumes/" + fileName);
+            resume.setOriginalFilename(originalFilename);
             resumeRepository.save(resume);
 
             return resume.getResumePath();
         } catch (IOException e) {
             throw new RuntimeException("Failed to upload resume: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteResume(JobSeekerProfile seeker) {
+        Resume resume = getResumeBySeeker(seeker);
+        if (resume != null && resume.getResumePath() != null) {
+            try {
+                // Delete physical file
+                String uploadDir = "uploads/resumes/";
+                String fileName = resume.getResumePath().replace("/resumes/", "");
+                Path filePath = Paths.get(uploadDir + fileName);
+                Files.deleteIfExists(filePath);
+
+                // Clear fields in DB
+                resume.setResumePath(null);
+                resume.setOriginalFilename(null);
+                resumeRepository.save(resume);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to delete physical resume file: " + e.getMessage());
+            }
         }
     }
 }

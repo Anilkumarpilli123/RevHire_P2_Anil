@@ -9,4 +9,6 @@ public interface ResumeService {
     Resume saveResume(Resume resume);
 
     String uploadResume(JobSeekerProfile seeker, org.springframework.web.multipart.MultipartFile file);
+
+    void deleteResume(JobSeekerProfile seeker);
 }

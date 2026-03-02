@@ -44,4 +44,7 @@ public class Resume {
 
     @Column(name = "resume_path")
     private String resumePath;
+
+    @Column(name = "original_filename")
+    private String originalFilename;
 }
