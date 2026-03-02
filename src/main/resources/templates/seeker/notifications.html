@@ -8,45 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .container {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            background: rgba(255, 255, 255, 0.03);
-            border-right: 1px solid var(--glass-border);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-nav {
-            margin-top: 3rem;
-            flex: 1;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            color: #94a3b8;
-            text-decoration: none;
-            border-radius: 12px;
-            margin-bottom: 0.5rem;
-            transition: 0.3s;
-        }
-
-        .sidebar-nav a:hover,
-        .sidebar-nav a.active {
-            background: var(--glass-heavy);
-            color: white;
-        }
-
         .main-content {
             padding: 3rem;
-            overflow-y: auto;
         }
     </style>
 </head>
