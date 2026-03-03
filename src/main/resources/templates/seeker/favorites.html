@@ -8,14 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .job-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            position: relative;
-        }
     </style>
 </head>
 
@@ -29,23 +21,23 @@
             <h1>Your Saved Jobs</h1>
             <p style="color: #94a3b8; margin-bottom: 3rem;">Opportunities you're keeping an eye on.</p>
 
-            <div th:each="fav : ${favorites}" class="job-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                    <div>
-                        <div style="font-size: 1.5rem; font-weight: 700; color: white;" th:text="${fav.job.title}">Job
-                            Title</div>
-                        <div style="color: var(--primary); font-weight: 600;" th:text="${fav.job.company.name}">Company
-                        </div>
+            <div th:each="fav : ${favorites}" class="job-card-compact">
+                <div class="job-card-info">
+                    <div style="display: flex; align-items: baseline;">
+                        <h4 th:text="${fav.job.title}">Job Title</h4>
+                        <span class="company" th:text="${fav.job.company.name}"
+                            style="margin-left: 1rem;">Company</span>
                     </div>
                 </div>
-                <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
-                    <form th:action="@{'/seeker/jobs/' + ${fav.job.id} + '/favorite'}" method="post">
+                <div class="job-card-actions">
+                    <form th:action="@{'/seeker/jobs/' + ${fav.job.id} + '/favorite'}" method="post"
+                        style="display: inline;">
                         <input type="hidden" name="redirect" value="/seeker/favorites">
                         <button type="submit" class="btn btn-outline"
-                            style="width: auto; color: var(--error); border-color: var(--error);">Remove</button>
+                            style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem; color: var(--error); border-color: var(--error);">Remove</button>
                     </form>
-                    <a th:href="@{'/seeker/jobs/' + ${fav.job.id}}" class="btn btn-primary" style="width: auto;">View
-                        Details</a>
+                    <a th:href="@{'/seeker/jobs/' + ${fav.job.id}}" class="btn btn-primary"
+                        style="width: auto; padding: 0.5rem 1.5rem; font-size: 0.85rem;">View Details</a>
                 </div>
             </div>
 

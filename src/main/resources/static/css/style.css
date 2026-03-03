@@ -220,6 +220,72 @@ select.form-control option {
     border: 1px dashed var(--glass-border);
 }
 
+/* Compact Card Styles (Unified for Seeker & Employer) */
+.job-card-compact {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+    gap: 1.5rem;
+}
+
+.job-card-compact:hover {
+    background: var(--glass-heavy);
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+
+.job-card-info {
+    flex: 1;
+}
+
+.job-card-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.job-card-info .company {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-right: 1rem;
+}
+
+.job-card-meta {
+    display: flex;
+    gap: 1rem;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.job-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .job-card-compact {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .job-card-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
 /* Sidebar Styles */
 .sidebar {
     background: rgba(9, 9, 11, 0.95);
@@ -325,7 +391,7 @@ select.form-control option {
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 1rem;
     margin-top: 2rem;
 }
 

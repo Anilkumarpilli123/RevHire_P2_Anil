@@ -18,48 +18,6 @@
             align-items: flex-end;
         }
 
-        .job-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .job-card:hover {
-            transform: translateY(-5px);
-            background: var(--glass-heavy);
-            border-color: var(--primary);
-        }
-
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .job-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .company-name {
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        .job-meta {
-            display: flex;
-            gap: 1.5rem;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
         .tag {
             padding: 0.3rem 0.8rem;
             border-radius: 8px;
@@ -129,37 +87,34 @@
                 </div>
             </form>
 
-            <div th:each="job : ${jobs}" class="job-card">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title" th:text="${job.title}">Senior Developer</div>
-                        <div class="company-name" th:text="${job.company.name}">TechCorp Inc.</div>
+            <div th:each="job : ${jobs}" class="job-card-compact">
+                <div class="job-card-info">
+                    <div style="display: flex; align-items: baseline;">
+                        <h4 th:text="${job.title}">Senior Developer</h4>
+                        <span class="company" th:text="${job.company.name}" style="margin-left: 1rem;">TechCorp
+                            Inc.</span>
                     </div>
-                    <div class="tag" th:text="${job.jobType}">Full Time</div>
+                    <div class="job-card-meta">
+                        <span class="tag" th:text="${job.jobType}">Full Time</span>
+                        <span><i class="fas fa-map-marker-alt"></i> <span th:text="${job.location}">Remote</span></span>
+                        <span><i class="fas fa-briefcase"></i> <span
+                                th:text="${job.experienceRequired + '+ years exp'}">3+ years</span></span>
+                        <span th:if="${job.salaryRange}"><i class="fas fa-money-bill-wave"></i> <span
+                                th:text="${job.salaryRange}">$120k - $150k</span></span>
+                        <span th:if="${job.deadline != null}"><i class="far fa-calendar-alt"></i> Deadline: <span
+                                th:text="${job.deadline}">2026-12-31</span></span>
+                    </div>
                 </div>
-                <div class="job-meta">
-                    <span th:text="${job.location}">Remote</span>
-                    <span th:text="${job.experienceRequired + '+ years exp'}">3+ years exp</span>
-                    <span th:text="${job.salaryRange}">$120k - $150k</span>
-                </div>
-                <div class="job-meta" style="margin-top: 0.5rem; color: #cbd5e1;">
-                    <span th:if="${job.deadline != null}">
-                        <i class="far fa-calendar-alt"></i> Deadline: <span th:text="${job.deadline}">2026-12-31</span>
-                    </span>
-                    <span th:if="${job.numberOfOpenings != null}">
-                        <i class="fas fa-users"></i> Openings: <span th:text="${job.numberOfOpenings}">5</span>
-                    </span>
-                </div>
-                <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+                <div class="job-card-actions">
                     <form th:action="@{'/seeker/jobs/' + ${job.id} + '/favorite'}" method="post"
                         style="display: inline;">
                         <button type="submit" class="btn"
                             th:classappend="${favoriteJobIds != null and favoriteJobIds.contains(job.id)} ? 'btn-primary' : 'btn-outline'"
-                            style="width: auto;"
+                            style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;"
                             th:text="${favoriteJobIds != null and favoriteJobIds.contains(job.id)} ? 'Saved' : 'Save'"></button>
                     </form>
-                    <a th:href="@{'/seeker/jobs/' + ${job.id}}" class="btn btn-primary" style="width: auto;">View
-                        Details</a>
+                    <a th:href="@{'/seeker/jobs/' + ${job.id}}" class="btn btn-primary"
+                        style="width: auto; padding: 0.5rem 1.5rem; font-size: 0.85rem;">View Details</a>
                 </div>
             </div>
 

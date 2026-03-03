@@ -8,19 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .app-card {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
         .status-badge {
             padding: 0.5rem 1rem;
             border-radius: 10px;
@@ -72,19 +59,22 @@
                 <p th:if="${param.success[0] == 'withdrawn'}" style="color: #94a3b8;">Application withdrawn.</p>
             </div>
 
-            <div th:each="app : ${applications}" class="app-card">
-                <div>
-                    <h3 th:text="${app.job.title}">Software Engineer</h3>
-                    <p style="color: var(--primary); font-weight: 600;" th:text="${app.job.company.name}">TechCorp</p>
-                    <p style="color: #94a3b8; font-size: 0.8rem; margin-top: 0.5rem;">
-                        Applied on: <span th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">12 Oct
-                            2023</span>
-                    </p>
+            <div th:each="app : ${applications}" class="job-card-compact">
+                <div class="job-card-info">
+                    <div style="display: flex; align-items: baseline;">
+                        <h4 th:text="${app.job.title}">Software Engineer</h4>
+                        <span class="company" th:text="${app.job.company.name}"
+                            style="margin-left: 1rem;">TechCorp</span>
+                    </div>
+                    <div class="job-card-meta">
+                        <span><i class="far fa-calendar-check"></i> Applied on: <span
+                                th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">12 Oct 2023</span></span>
+                    </div>
                 </div>
-                <div style="text-align: right;">
+                <div class="job-card-actions">
                     <div th:class="'status-badge status-' + ${app.status}" th:text="${app.status}">APPLIED</div>
                     <form th:if="${app.status == 'APPLIED'}" th:action="@{'/seeker/applications/withdraw/' + ${app.id}}"
-                        method="post" style="margin-top: 1rem;">
+                        method="post" style="display: inline;">
                         <button type="submit" class="btn"
                             style="background: transparent; color: #f87171; border: 1px solid #f87171; width: auto; padding: 0.4rem 1rem; font-size: 0.8rem;">Withdraw</button>
                     </form>
