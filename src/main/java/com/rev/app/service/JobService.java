@@ -21,4 +21,6 @@ public interface JobService {
     List<Job> getJobsByCompany(int companyId);
 
     void toggleFavorite(User user, int jobId);
+
+    void updateJobStatus(int jobId, String status);
 }

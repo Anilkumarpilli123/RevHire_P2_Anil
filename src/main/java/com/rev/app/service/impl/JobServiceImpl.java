@@ -7,6 +7,7 @@ import com.rev.app.repository.FavoriteJobRepository;
 import com.rev.app.entity.JobSeekerProfile;
 import com.rev.app.repository.JobRepository;
 import com.rev.app.repository.JobSeekerRepository;
+import com.rev.app.repository.ApplicationRepository;
 import com.rev.app.service.JobService;
 import com.rev.app.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private NotificationService notificationService;
+
+    @Autowired
+    private ApplicationRepository applicationRepository;
 
     @Override
     public List<Job> getAllOpenJobs() {
@@ -86,8 +90,21 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @Transactional
     public void deleteJob(int id) {
+        Job job = getJobById(id);
+        // Delete associated applications first
+        var applications = applicationRepository.findByJob(job);
+        applicationRepository.deleteAll(applications);
+
         jobRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateJobStatus(int jobId, String status) {
+        Job job = getJobById(jobId);
+        job.setStatus(status);
+        jobRepository.save(job);
     }
 
     @Override

@@ -233,6 +233,32 @@ public class EmployerController {
         return "redirect:/employer/applicants/" + jobId + "?success=bulk_updated";
     }
 
+    @GetMapping("/jobs/manage")
+    public String manageJobs(Model model, Authentication auth) {
+        User user = userRepository.findByEmail(auth.getName()).get();
+        EmployerProfile profile = employerService.getProfileByUser(user);
+
+        if (!profile.isComplete()) {
+            return "redirect:/employer/profile/edit?message=complete_profile_first";
+        }
+
+        List<Job> jobs = jobService.getJobsByCompany(profile.getCompany().getId());
+        model.addAttribute("jobs", jobs);
+        return "employer/manage-jobs";
+    }
+
+    @PostMapping("/jobs/{id}/status")
+    public String updateJobStatus(@PathVariable int id, @RequestParam String status) {
+        jobService.updateJobStatus(id, status);
+        return "redirect:/employer/jobs/manage?success=status_updated";
+    }
+
+    @PostMapping("/jobs/{id}/delete")
+    public String deleteJob(@PathVariable int id) {
+        jobService.deleteJob(id);
+        return "redirect:/employer/jobs/manage?success=job_deleted";
+    }
+
     @GetMapping("/notifications")
     public String viewNotifications(Model model, Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();

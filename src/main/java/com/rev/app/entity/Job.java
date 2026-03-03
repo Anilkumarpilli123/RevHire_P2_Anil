@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = "company")
-@EqualsAndHashCode(exclude = "company")
+@ToString(exclude = { "company", "applications" })
+@EqualsAndHashCode(exclude = { "company", "applications" })
 public class Job {
 
     @Id
@@ -63,4 +63,8 @@ public class Job {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private java.util.List<Application> applications = new java.util.ArrayList<>();
 }

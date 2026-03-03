@@ -69,6 +69,8 @@
 
         <nav class="sidebar-nav">
             <a href="/employer/dashboard" th:classappend="${activePage == 'dashboard' ? 'active' : ''}">Dashboard</a>
+            <a href="/employer/jobs/manage" th:classappend="${activePage == 'manage-jobs' ? 'active' : ''}">Manage
+                Jobs</a>
             <a href="/employer/jobs/new" th:classappend="${activePage == 'post-job' ? 'active' : ''}">Post a Job</a>
             <a href="/employer/profile" th:classappend="${activePage == 'profile' ? 'active' : ''}">My Profile</a>
             <a href="/employer/notifications" th:classappend="${activePage == 'notifications' ? 'active' : ''}">
