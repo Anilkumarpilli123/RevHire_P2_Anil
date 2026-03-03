@@ -28,4 +28,6 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
                         @Param("jobType") String jobType);
 
         List<Job> findByCompany_Id(int companyId);
+
+        List<Job> findByStatus(String status);
 }
