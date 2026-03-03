@@ -121,26 +121,41 @@ public class EmployerController {
         EmployerProfile profile = employerService.getProfileByUser(user);
 
         // Update Personal Details
-        profile.setName(personalName);
-        profile.setPhone(personalPhone);
-        profile.setLocation(personalLocation);
-        profile.setJobRole(jobRole);
+        profile.setName(cleanValue(personalName));
+        profile.setPhone(cleanValue(personalPhone));
+        profile.setLocation(cleanValue(personalLocation));
+        profile.setJobRole(cleanValue(jobRole));
 
         // Update Company Details
         Company company = profile.getCompany();
         if (company == null) {
             company = new Company();
         }
-        company.setName(companyName);
-        company.setIndustry(companyIndustry);
-        company.setDescription(companyDescription);
-        company.setWebsite(companyWebsite);
-        company.setLocation(companyLocation);
+        company.setName(cleanValue(companyName));
+        company.setIndustry(cleanValue(companyIndustry));
+        company.setDescription(cleanValue(companyDescription));
+        company.setWebsite(cleanValue(companyWebsite));
+        company.setLocation(cleanValue(companyLocation));
 
         profile.setCompany(company);
         employerService.updateProfile(profile);
 
         return "redirect:/employer/dashboard?success=profile_updated";
+    }
+
+    private String cleanValue(String val) {
+        if (val == null)
+            return null;
+        val = val.trim();
+        if (val.contains(",")) {
+            String[] parts = val.split(",");
+            for (String part : parts) {
+                if (part != null && !part.trim().isEmpty()) {
+                    return part.trim();
+                }
+            }
+        }
+        return val;
     }
 
     @GetMapping("/jobs/new")

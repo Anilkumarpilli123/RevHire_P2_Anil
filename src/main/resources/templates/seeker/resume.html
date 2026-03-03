@@ -53,7 +53,7 @@
             </div>
 
             <form th:action="@{/seeker/resume}" th:object="${resume}" method="post" enctype="multipart/form-data"
-                class="resume-form">
+                class="resume-form" autocomplete="off">
                 <input type="hidden" th:field="*{id}">
 
                 <div class="section-card">
@@ -148,6 +148,13 @@
             </form>
         </main>
     </div>
+    <script>
+        document.querySelector('.resume-form').addEventListener('submit', function () {
+            setTimeout(() => {
+                this.querySelectorAll('input[type=text], textarea').forEach(el => el.value = '');
+            }, 100);
+        });
+    </script>
     <script th:src="@{/js/main.js}"></script>
 </body>
 

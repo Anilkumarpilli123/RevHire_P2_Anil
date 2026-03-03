@@ -158,36 +158,47 @@ public class SeekerController {
     }
 
     @PostMapping("/profile")
-    public String updateProfile(@ModelAttribute JobSeekerProfile profileData, Authentication auth) {
+    public String updateProfile(
+            @RequestParam String name,
+            @RequestParam String phone,
+            @RequestParam String location,
+            @RequestParam EmploymentStatus employmentStatus,
+            @RequestParam(required = false) String companyName,
+            @RequestParam(required = false) String collegeName,
+            @RequestParam(required = false) String branch,
+            @RequestParam(required = false) String jobRole,
+            @RequestParam(required = false) String experience,
+            Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();
         JobSeekerProfile existingProfile = getOrCreateProfile(user);
 
-        existingProfile.setName(profileData.getName());
-        existingProfile.setPhone(profileData.getPhone());
-        existingProfile.setLocation(profileData.getLocation());
-        existingProfile.setEmploymentStatus(profileData.getEmploymentStatus());
+        existingProfile.setName(cleanValue(name));
+        existingProfile.setPhone(cleanValue(phone));
+        existingProfile.setLocation(cleanValue(location));
+        existingProfile.setEmploymentStatus(employmentStatus);
+        existingProfile.setCompanyName(cleanValue(companyName));
+        existingProfile.setCollegeName(cleanValue(collegeName));
+        existingProfile.setBranch(cleanValue(branch));
+        existingProfile.setJobRole(cleanValue(jobRole));
+        existingProfile.setExperience(cleanValue(experience));
 
-        // Handle possible duplication from multiple hidden fields
-        String companyName = profileData.getCompanyName();
-        if (companyName != null && companyName.contains(",")) {
-            // Take the first non-empty segment
-            String[] parts = companyName.split(",");
+        jobSeekerService.updateProfile(existingProfile);
+        return "redirect:/seeker/profile?success=profile_updated";
+    }
+
+    private String cleanValue(String val) {
+        if (val == null)
+            return null;
+        val = val.trim();
+        if (val.contains(",")) {
+            String[] parts = val.split(",");
             for (String part : parts) {
                 if (part != null && !part.trim().isEmpty()) {
-                    companyName = part.trim();
-                    break;
+                    return part.trim();
                 }
             }
         }
-        existingProfile.setCompanyName(companyName);
-
-        existingProfile.setCollegeName(profileData.getCollegeName());
-        existingProfile.setBranch(profileData.getBranch());
-        existingProfile.setJobRole(profileData.getJobRole());
-        existingProfile.setExperience(profileData.getExperience());
-
-        jobSeekerService.updateProfile(existingProfile);
-        return "redirect:/seeker/dashboard?success=profile_updated";
+        return val;
     }
 
     @GetMapping("/jobs")
@@ -262,7 +273,7 @@ public class SeekerController {
             if (file != null && !file.isEmpty()) {
                 resumeService.uploadResume(profile, file);
             }
-            return "redirect:/seeker/resume?success=true";
+            return "redirect:/seeker/profile?success=resume_updated";
         } catch (RuntimeException e) {
             return "redirect:/seeker/resume?error="
                     + java.net.URLEncoder.encode(e.getMessage(), java.nio.charset.StandardCharsets.UTF_8);

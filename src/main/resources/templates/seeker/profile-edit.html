@@ -42,7 +42,8 @@
                         Please complete your profile details first to unlock all features.
                     </div>
 
-                    <form th:action="@{/seeker/profile}" th:object="${profile}" method="post" id="profileForm">
+                    <form th:action="@{/seeker/profile}" th:object="${profile}" method="post" id="profileForm"
+                        autocomplete="off">
                         <div
                             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
                             <div class="form-group">
@@ -141,7 +142,7 @@
                             </div>
                         </div>
 
-                        <div style="display: flex; gap: 1.5rem; margin-top: 3.5rem;">
+                        <div style="display: flex; gap: 1rem; margin-top: 3.5rem;">
                             <button type="submit" class="btn btn-primary" style="flex: 2; padding: 1rem;">Save
                                 Changes</button>
                             <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'" class="btn"

@@ -119,6 +119,13 @@
             </div>
         </main>
     </div>
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function () {
+            setTimeout(() => {
+                this.querySelectorAll('input[type=text], input[type=url], textarea').forEach(el => el.value = '');
+            }, 100);
+        });
+    </script>
     <script th:src="@{/js/main.js}"></script>
 </body>
 
