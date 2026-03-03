@@ -137,6 +137,17 @@ select.form-control option {
     color: var(--error);
     font-size: 0.85rem;
     margin-top: 0.25rem;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.alert {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.alert.fading,
+.error-text.fading {
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
 .auth-header {
@@ -283,6 +294,143 @@ select.form-control option {
     .job-card-actions {
         width: 100%;
         justify-content: flex-end;
+    }
+}
+
+/* Profile System */
+.profile-banner {
+    height: 120px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 20px 20px 0 0;
+    opacity: 0.8;
+}
+
+.profile-header-card {
+    position: relative;
+    margin-top: -100px;
+    padding: 2.5rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 2.5rem;
+}
+
+.profile-avatar-xl {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #1e1b4b;
+    border: 6px solid #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+}
+
+.profile-main-info {
+    flex: 1;
+    padding-bottom: 1rem;
+}
+
+.profile-main-info h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.profile-main-info .headline {
+    color: #94a3b8;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.profile-meta-grid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.profile-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.profile-meta-item i {
+    color: var(--primary);
+}
+
+.profile-section-card {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.profile-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.profile-section-header h2 {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.profile-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.profile-detail-item label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+}
+
+.profile-detail-item p {
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 500;
+}
+
+@media (max-width: 991px) {
+    .profile-header-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: -75px;
+        padding: 2rem;
+    }
+
+    .profile-meta-grid {
+        justify-content: center;
+    }
+}
+
+.profile-edit-container {
+    max-width: 850px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .profile-edit-container {
+        margin: 1rem auto;
+        padding: 0 1rem;
     }
 }
 

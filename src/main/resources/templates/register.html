@@ -62,7 +62,7 @@
                 <p>Join our community of professionals</p>
             </div>
 
-            <div th:if="${error}" class="error-text" style="text-align: center; margin-bottom: 1rem;"
+            <div th:if="${error}" class="alert error-text" style="text-align: center; margin-bottom: 1rem;"
                 th:text="${error}"></div>
 
             <form th:action="@{/register}" th:object="${signupRequest}" method="post">

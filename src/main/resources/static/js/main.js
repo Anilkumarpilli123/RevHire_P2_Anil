@@ -37,4 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
             closeSidebar();
         }
     });
+
+    // Auto-hide messages after 5 seconds
+    const messages = document.querySelectorAll('.alert, .error-text');
+    messages.forEach(msg => {
+        // Only auto-hide error-text if it's a flash message (not persistent form validation)
+        // For now, we apply it to all as per user request
+        setTimeout(() => {
+            msg.classList.add('fading');
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 500);
+        }, 4500);
+    });
 });

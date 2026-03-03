@@ -173,7 +173,7 @@ public class SeekerController {
         existingProfile.setExperience(profileData.getExperience());
 
         jobSeekerService.updateProfile(existingProfile);
-        return "redirect:/seeker/profile?success=profile_updated";
+        return "redirect:/seeker/dashboard?success=profile_updated";
     }
 
     @GetMapping("/jobs")

@@ -53,6 +53,11 @@ public class EmployerController {
     public String dashboard(Model model, Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();
         EmployerProfile profile = employerService.getProfileByUser(user);
+
+        if (!profile.isComplete()) {
+            return "redirect:/employer/profile/edit?message=complete_profile_first";
+        }
+
         if (profile.getCompany() != null) {
             List<Job> jobs = jobService.getJobsByCompany(profile.getCompany().getId());
             model.addAttribute("jobs", jobs);
@@ -83,6 +88,11 @@ public class EmployerController {
     public String viewProfile(Model model, Authentication auth) {
         User user = userRepository.findByEmail(auth.getName()).get();
         EmployerProfile profile = employerService.getProfileByUser(user);
+
+        if (!profile.isComplete()) {
+            return "redirect:/employer/profile/edit?message=complete_profile_first";
+        }
+
         model.addAttribute("profile", profile);
         model.addAttribute("email", user.getEmail());
         return "employer/profile";
@@ -130,11 +140,18 @@ public class EmployerController {
         profile.setCompany(company);
         employerService.updateProfile(profile);
 
-        return "redirect:/employer/profile?success=profile_updated";
+        return "redirect:/employer/dashboard?success=profile_updated";
     }
 
     @GetMapping("/jobs/new")
-    public String newJob(Model model) {
+    public String newJob(Model model, Authentication auth) {
+        User user = userRepository.findByEmail(auth.getName()).get();
+        EmployerProfile profile = employerService.getProfileByUser(user);
+
+        if (!profile.isComplete()) {
+            return "redirect:/employer/profile/edit?message=complete_profile_first";
+        }
+
         model.addAttribute("job", new Job());
         return "employer/post-job";
     }
@@ -144,9 +161,8 @@ public class EmployerController {
         User user = userRepository.findByEmail(auth.getName()).get();
         EmployerProfile profile = employerService.getProfileByUser(user);
 
-        if (profile.getCompany() == null) {
-            redirectAttributes.addFlashAttribute("error", "Please complete your company profile before posting a job.");
-            return "redirect:/employer/profile";
+        if (!profile.isComplete()) {
+            return "redirect:/employer/profile/edit?message=complete_profile_first";
         }
 
         job.setCompany(profile.getCompany());

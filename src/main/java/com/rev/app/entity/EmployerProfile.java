@@ -34,4 +34,14 @@ public class EmployerProfile {
 
     @Column(name = "job_role")
     private String jobRole;
+
+    public boolean isComplete() {
+        return name != null && !name.trim().isEmpty() &&
+                phone != null && !phone.trim().isEmpty() &&
+                location != null && !location.trim().isEmpty() &&
+                jobRole != null && !jobRole.trim().isEmpty() &&
+                company != null && company.getName() != null && !company.getName().trim().isEmpty() &&
+                company.getIndustry() != null && !company.getIndustry().trim().isEmpty() &&
+                company.getLocation() != null && !company.getLocation().trim().isEmpty();
+    }
 }

@@ -9,349 +9,171 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .profile-header {
-            position: relative;
-            margin-bottom: 5rem;
-        }
-
-        .cover-photo {
-            height: 120px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 20px 20px 0 0;
-            opacity: 0.8;
-        }
-
-        .profile-info-card {
-            position: relative;
-            margin-top: -111px;
-            padding: 2rem;
-            display: flex;
-            align-items: flex-end;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .profile-avatar {
-                width: 120px;
-                height: 120px;
-                font-size: 3rem;
-                margin: 0 auto;
-            }
-
-            .profile-info-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                margin-top: -60px;
-            }
-
-            .contact-grid {
-                flex-direction: column;
-                gap: 0.5rem;
-                align-items: center;
-            }
-        }
-
-        .profile-avatar {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: #1e1b4b;
-            border: 5px solid #0f172a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            font-weight: 700;
-            color: white;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .profile-basic-details {
-            flex: 1;
-            padding-bottom: 1rem;
-        }
-
-        .profile-basic-details h1 {
-            font-size: 2.2rem;
-            margin: 0;
-            color: white;
-        }
-
-        .headline {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            margin-top: 0.2rem;
-        }
-
-        .contact-grid {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1rem;
-            color: #cbd5e1;
-            font-size: 0.9rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-item i {
-            color: var(--primary);
-        }
-
-        .section-card {
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 0.5rem;
-        }
-
-        .progress-container {
-            margin-top: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            height: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            transition: width 1s ease-in-out;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .status-badge {
-            background: rgba(99, 102, 241, 0.2);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #818cf8;
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            text-transform: capitalize;
-        }
+        /* Using global profile styles from style.css */
     </style>
 </head>
 
 <body>
     <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
     <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
-    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 2rem;">
 
-        <header style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
-            <a href="/seeker/dashboard"
-                style="color: #94a3b8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fas fa-arrow-left"></i> Back to Dashboard
-            </a>
-            <div class="action-buttons">
+    <div class="container">
+        <div th:replace="~{common/fragments :: seeker-sidebar('profile')}"></div>
+
+        <main class="main-content">
+            <header style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                <h1 style="margin: 0;">My Profile</h1>
                 <a href="/seeker/profile/edit" class="btn btn-primary" style="width: auto; padding: 0.8rem 1.5rem;">
                     <i class="fas fa-edit"></i> Edit Profile
                 </a>
-            </div>
-        </header>
+            </header>
 
-        <div class="glass-container profile-header" style="padding:0; overflow:hidden;">
-            <div class="cover-photo"></div>
-            <div class="profile-info-card">
-                <div class="profile-avatar"
-                    th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'A'}">
-                    A</div>
-                <div class="profile-basic-details">
-                    <h1 th:text="${profile.name}">Anil Kumar</h1>
-                    <p class="headline">
-                        <span th:if="${profile.employmentStatus?.name() == 'EMPLOYED'}">
-                            <span th:text="${profile.jobRole != null ? profile.jobRole : 'Professional'}"></span> at
-                            <span
-                                th:text="${profile.companyName != null ? profile.companyName : 'Organization'}"></span>
-                        </span>
-                        <span th:if="${profile.employmentStatus?.name() == 'UNEMPLOYED'}"
-                            th:text="${profile.jobRole != null ? (profile.jobRole + ' | ' + (profile.experience ?: 'Fresher')) : (profile.experience ?: 'Looking for opportunities')}"></span>
-                        <span th:if="${profile.employmentStatus?.name() == 'STUDENT'}">
-                            <span th:text="${profile.branch != null ? profile.branch : 'Student'}"></span> at
-                            <span th:text="${profile.collegeName != null ? profile.collegeName : 'Institution'}"></span>
-                        </span>
-                    </p>
-                    <div class="contact-grid">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span th:text="${profile.location}">Hyderabad, India</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span th:text="${profile.phone}">+91 9876543210</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span th:text="${email}">anil@example.com</span>
+            <div th:if="${param.success}" class="alert alert-success"
+                style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                <p th:if="${param.success[0] == 'profile_updated'}">Profile updated successfully!</p>
+            </div>
+
+            <div class="glass-container" style="padding: 0; overflow: hidden; margin-bottom: 2rem;">
+                <div class="profile-banner"></div>
+                <div class="profile-header-card">
+                    <div class="profile-avatar-xl"
+                        th:text="${profile != null and profile.name != null and profile.name.length() > 0 ? profile.name.substring(0,1) : 'A'}">
+                        A</div>
+                    <div class="profile-main-info">
+                        <h1 th:text="${profile.name}">Anil Kumar</h1>
+                        <p class="headline">
+                            <span th:if="${profile.employmentStatus?.name() == 'EMPLOYED'}">
+                                <span th:text="${profile.jobRole != null ? profile.jobRole : 'Professional'}"></span> at
+                                <span
+                                    th:text="${profile.companyName != null ? profile.companyName : 'Organization'}"></span>
+                            </span>
+                            <span th:if="${profile.employmentStatus?.name() == 'UNEMPLOYED'}"
+                                th:text="${profile.jobRole != null ? (profile.jobRole + ' | ' + (profile.experience ?: 'Fresher')) : (profile.experience ?: 'Looking for opportunities')}"></span>
+                            <span th:if="${profile.employmentStatus?.name() == 'STUDENT'}">
+                                <span th:text="${profile.branch != null ? profile.branch : 'Student'}"></span> at
+                                <span
+                                    th:text="${profile.collegeName != null ? profile.collegeName : 'Institution'}"></span>
+                            </span>
+                        </p>
+                        <div class="profile-meta-grid">
+                            <div class="profile-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span th:text="${profile.location}">Hyderabad, India</span>
+                            </div>
+                            <div class="profile-meta-item">
+                                <i class="fas fa-phone"></i>
+                                <span th:text="${profile.phone}">+91 9876543210</span>
+                            </div>
+                            <div class="profile-meta-item">
+                                <i class="fas fa-envelope"></i>
+                                <span th:text="${email}">anil@example.com</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-            <div class="left-col">
-                <div class="glass-container section-card">
-                    <div class="section-header">
-                        <h2><i class="fas fa-user-circle" style="color:var(--primary); margin-right:0.5rem;"></i>
-                            Professional Details</h2>
-                        <span class="status-badge" th:text="${profile.employmentStatus}">Status</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                <!-- Professional Details -->
+                <div class="glass-container profile-section-card">
+                    <div class="profile-section-header">
+                        <h2><i class="fas fa-user-circle" style="color:var(--primary);"></i> Professional Details</h2>
+                        <span class="status-badge" th:text="${profile.employmentStatus}"
+                            style="background: rgba(99, 102, 241, 0.2); padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.8rem; color: #818cf8; border: 1px solid rgba(129, 140, 248, 0.3);">Status</span>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; color: #cbd5e1;">
+                    <div class="profile-detail-grid">
                         <!-- Employed Details -->
                         <th:block th:if="${profile.employmentStatus?.name() == 'EMPLOYED'}">
-                            <div>
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Current Company</label>
+                            <div class="profile-detail-item">
+                                <label>Current Company</label>
                                 <p th:text="${profile.companyName}">Google</p>
                             </div>
-                            <div>
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Current Role</label>
+                            <div class="profile-detail-item">
+                                <label>Current Role</label>
                                 <p th:text="${profile.jobRole}">Senior Dev</p>
                             </div>
-                            <div>
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Total
-                                    Experience</label>
+                            <div class="profile-detail-item">
+                                <label>Total Experience</label>
                                 <p th:text="${profile.experience}">5 Years</p>
                             </div>
                         </th:block>
 
                         <!-- Unemployed Details -->
                         <th:block th:if="${profile.employmentStatus?.name() == 'UNEMPLOYED'}">
-                            <div th:if="${profile.companyName != null and !profile.companyName.isEmpty()}">
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Previous
-                                    Company</label>
+                            <div class="profile-detail-item"
+                                th:if="${profile.companyName != null and !profile.companyName.isEmpty()}">
+                                <label>Previous Company</label>
                                 <p th:text="${profile.companyName}">Amazon</p>
                             </div>
-                            <div th:if="${profile.jobRole != null and !profile.jobRole.isEmpty()}">
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Previous Role</label>
+                            <div class="profile-detail-item"
+                                th:if="${profile.jobRole != null and !profile.jobRole.isEmpty()}">
+                                <label>Previous Role</label>
                                 <p th:text="${profile.jobRole}">Analyst</p>
                             </div>
-                            <div>
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Experience
-                                    Level</label>
+                            <div class="profile-detail-item">
+                                <label>Experience Level</label>
                                 <p th:text="${profile.experience}">Fresher</p>
                             </div>
                         </th:block>
 
                         <!-- Student Details -->
                         <th:block th:if="${profile.employmentStatus?.name() == 'STUDENT'}">
-                            <div>
-                                <label
-                                    style="display:block; font-size: 0.8rem; color: #94a3b8;">College/University</label>
+                            <div class="profile-detail-item">
+                                <label>College/University</label>
                                 <p th:text="${profile.collegeName}">IIT Hyderabad</p>
                             </div>
-                            <div>
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Branch</label>
+                            <div class="profile-detail-item">
+                                <label>Branch</label>
                                 <p th:text="${profile.branch}">ECE</p>
                             </div>
-                            <div>
-                                <label style="display:block; font-size: 0.8rem; color: #94a3b8;">Seeking</label>
+                            <div class="profile-detail-item">
+                                <label>Seeking</label>
                                 <p th:text="${profile.experience}">Internship</p>
                             </div>
                         </th:block>
                     </div>
                 </div>
 
-                <div class="glass-container section-card">
-                    <div class="section-header">
-                        <h2><i class="fas fa-file-alt" style="color:var(--primary); margin-right:0.5rem;"></i> Resume
-                            Summary</h2>
-                        <a href="/seeker/resume"
-                            style="color:var(--primary); text-decoration:none; font-size:0.9rem;">Edit Resume</a>
+                <!-- Resume Summary & Strength -->
+                <div class="glass-container profile-section-card">
+                    <div class="profile-section-header">
+                        <h2><i class="fas fa-file-alt" style="color:var(--secondary);"></i> Profile Highlights</h2>
                     </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <span style="color: #94a3b8; font-size: 0.9rem;">Profile Completion</span>
+                            <span style="color: var(--primary); font-weight: 600;"
+                                th:text="${completionPercentage + '%'}">75%</span>
+                        </div>
+                        <div
+                            style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; height: 10px; overflow: hidden;">
+                            <div
+                                th:style="'width: ' + ${completionPercentage} + '%; height: 100%; background: linear-gradient(to right, var(--primary), var(--secondary));'">
+                            </div>
+                        </div>
+                    </div>
+
                     <div
-                        style="padding: 1rem; border-left: 2px solid var(--primary); background: rgba(255,255,255,0.02); border-radius: 0 10px 10px 0;">
-                        <p style="color:#94a3b8; font-style: italic; margin-bottom: 1rem;">
+                        style="padding: 1.25rem; border-left: 3px solid var(--primary); background: rgba(255,255,255,0.02); border-radius: 0 12px 12px 0;">
+                        <p style="color:#cbd5e1; font-style: italic; margin-bottom: 1rem; line-height: 1.6;">
                             "Professional seeking <strong><span
                                     th:text="${profile.jobRole != null ? profile.jobRole : 'exciting opportunities'}"></span></strong>
                             to leverage skills and drive impact."
                         </p>
                         <div th:if="${profile.resume != null and profile.resume.resumePath != null}">
                             <a th:href="${profile.resume.resumePath}" target="_blank"
-                                style="color: var(--primary); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
-                                <i class="fas fa-file-download"></i> Download Full Resume (PDF/DOCX)
+                                style="color: var(--primary); text-decoration: none; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-file-pdf"></i> Download Resume
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="right-col">
-                <div class="glass-container section-card">
-                    <div class="section-header">
-                        <h3>Profile Strength</h3>
-                    </div>
-                    <div
-                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                        <span style="color: #94a3b8; font-size: 0.9rem;">Completion</span>
-                        <span style="color: var(--primary); font-weight: 600;"
-                            th:text="${completionPercentage + '%'}">75%</span>
-                    </div>
-                    <div class="progress-container">
-                        <div class="progress-bar" th:style="'width: ' + ${completionPercentage} + '%'"></div>
-                    </div>
-                    <p style="font-size: 0.8rem; color: #64748b; margin-top: 1rem;">
-                        <i class="fas fa-lightbulb" style="color: #fbbf24; margin-right: 0.3rem;"></i>
-                        <span th:if="${completionPercentage < 100}">Complete all fields to show up in more
-                            searches!</span>
-                        <span th:if="${completionPercentage == 100}">Your profile is star-rated!</span>
-                    </p>
-                </div>
-
-                <div class="glass-container section-card"
-                    style="padding: 1.5rem; background: rgba(99, 102, 241, 0.05); border: 1px dashed rgba(99, 102, 241, 0.3);">
-                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem; color: #818cf8;">
-                        <i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i> Profile Tip
-                    </h3>
-                    <p style="font-size: 0.9rem; color: #94a3b8; line-height: 1.5;">
-                        Users with a complete professional summary and a clear job role are <strong>2x more
-                            likely</strong> to be noticed by top recruiters.
-                    </p>
-                    <div
-                        style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.03); border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
-                        <span style="font-size: 0.8rem; color: #64748b; display: block; margin-bottom: 0.3rem;">Next
-                            Suggestion:</span>
-                        <a href="/seeker/resume"
-                            style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;">
-                            Add specific skills <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </main>
+    </div>
     </div>
     <script th:src="@{/js/main.js}"></script>
 </body>

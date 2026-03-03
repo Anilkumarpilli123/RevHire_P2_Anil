@@ -9,33 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
-        .profile-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .profile-container {
-                margin: 1rem auto;
-                padding: 1rem;
-            }
-
-            .glass-container {
-                padding: 1.5rem !important;
-            }
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #94a3b8;
-        }
-
         .hidden {
             display: none;
         }
@@ -45,128 +18,140 @@
 <body>
     <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
     <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
-    <!-- Since this is a standalone page, we might not need the full sidebar, 
-         but we keep the mobile header for brand consistency and potential toggle if we add it later -->
-    <div class="profile-container">
-        <header style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
-            <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'"
-                style="color: #94a3b8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
-                <i class="fas fa-arrow-left"></i> <span
-                    th:text="${profile.isComplete()} ? 'Back to Profile' : 'Back to Dashboard'">Back</span>
-            </a>
-        </header>
 
-        <h2 class="logo"
-            style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; margin-bottom: 1rem; text-align: center;">
-            RevHire</h2>
+    <div class="container">
+        <div th:replace="~{common/fragments :: seeker-sidebar('profile')}"></div>
 
-        <div class="glass-container" style="padding: 3rem;">
-            <header style="margin-bottom: 2rem; text-align: center;">
-                <h1>Update Your Details</h1>
-                <p style="color: #94a3b8;">Keep your professional information up to date.</p>
-            </header>
+        <main class="main-content">
+            <div class="profile-edit-container">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'"
+                        style="color: #94a3b8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-arrow-left"></i>
+                        <span th:text="${profile.isComplete()} ? 'Back to Profile' : 'Back to Dashboard'">Back</span>
+                    </a>
+                </header>
 
-            <div th:if="${param.message != null and param.message[0] == 'complete_profile_first'}" class="alert-info">
-                Please complete your profile details first to unlock all features.
+                <div class="glass-container">
+                    <h1 style="margin-bottom: 0.5rem;">Update Your Details</h1>
+                    <p style="color: #94a3b8; margin-bottom: 2.5rem;">Keep your professional information up to date.</p>
+
+                    <div th:if="${param.message != null and param.message[0] == 'complete_profile_first'}"
+                        style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                        Please complete your profile details first to unlock all features.
+                    </div>
+
+                    <form th:action="@{/seeker/profile}" th:object="${profile}" method="post" id="profileForm">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" th:field="*{name}" class="form-control" required
+                                    placeholder="Enter your full name">
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email Address (Read-only)</label>
+                                <input type="email" th:value="${email}" class="form-control" readonly
+                                    style="opacity: 0.7; cursor: not-allowed;">
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Phone Number</label>
+                                <input type="tel" th:field="*{phone}" class="form-control" required
+                                    placeholder="e.g. +91 9876543210">
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                                <input type="text" th:field="*{location}" class="form-control" required
+                                    placeholder="e.g. Hyderabad, India">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="max-width: 400px; margin-bottom: 2.5rem;">
+                            <label><i class="fas fa-id-card"></i> Employment Status</label>
+                            <select th:field="*{employmentStatus}" class="form-control" id="statusSelect" required>
+                                <option value="">Select Status</option>
+                                <option value="EMPLOYED">Employed</option>
+                                <option value="UNEMPLOYED">Unemployed</option>
+                                <option value="STUDENT">Student</option>
+                            </select>
+                        </div>
+
+                        <!-- Conditional Fields -->
+                        <div id="employedFields" class="hidden">
+                            <div class="form-group">
+                                <label><i class="fas fa-building"></i> Current Company Name</label>
+                                <input type="text" th:field="*{companyName}" class="form-control" id="companyInput"
+                                    placeholder="Where do you work?">
+                            </div>
+                        </div>
+
+                        <div id="unemployedFields" class="hidden">
+                            <div class="form-group">
+                                <label><i class="fas fa-history"></i> Previous Company Name (Optional)</label>
+                                <input type="text" th:field="*{companyName}" class="form-control"
+                                    placeholder="Last company you worked for">
+                            </div>
+                        </div>
+
+                        <div id="studentFields" class="hidden">
+                            <div
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label><i class="fas fa-university"></i> College Name</label>
+                                    <input type="text" th:field="*{collegeName}" class="form-control" id="collegeInput"
+                                        placeholder="Name of your institution">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-graduation-cap"></i> Branch</label>
+                                    <input type="text" th:field="*{branch}" class="form-control" id="branchInput"
+                                        placeholder="e.g. Computer Science">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shared Conditional Dropdowns -->
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div id="experienceGroup" class="form-group hidden">
+                                <label id="experienceLabel"><i class="fas fa-clock"></i> Years of Experience</label>
+                                <select th:field="*{experience}" class="form-control" id="experienceSelect">
+                                    <!-- Options filled by JS -->
+                                </select>
+                            </div>
+
+                            <div id="roleGroup" class="form-group hidden">
+                                <label><i class="fas fa-briefcase"></i> Role</label>
+                                <select th:field="*{jobRole}" class="form-control" id="roleSelect">
+                                    <option value="">Select Role</option>
+                                    <option value="Software Engineer">Software Engineer</option>
+                                    <option value="Data Scientist">Data Scientist</option>
+                                    <option value="Product Manager">Product Manager</option>
+                                    <option value="UI/UX Designer">UI/UX Designer</option>
+                                    <option value="Marketing Specialist">Marketing Specialist</option>
+                                    <option value="Sales Executive">Sales Executive</option>
+                                    <option value="HR Manager">HR Manager</option>
+                                    <option value="Finance Analyst">Finance Analyst</option>
+                                    <option value="Business Analyst">Business Analyst</option>
+                                    <option value="DevOps Engineer">DevOps Engineer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1.5rem; margin-top: 3.5rem;">
+                            <button type="submit" class="btn btn-primary" style="flex: 2; padding: 1rem;">Save
+                                Changes</button>
+                            <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'" class="btn"
+                                style="flex: 1; background: rgba(255,255,255,0.05); text-align: center; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <form th:action="@{/seeker/profile}" th:object="${profile}" method="post" id="profileForm">
-                <div class="form-group">
-                    <label><i class="fas fa-user"></i> Full Name</label>
-                    <input type="text" th:field="*{name}" class="form-control" required
-                        placeholder="Enter your full name">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-envelope"></i> Email Address (Read-only)</label>
-                    <input type="email" th:value="${email}" class="form-control" readonly
-                        style="opacity: 0.7; cursor: not-allowed;">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-phone"></i> Phone Number</label>
-                    <input type="tel" th:field="*{phone}" class="form-control" required
-                        placeholder="e.g. +91 9876543210">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-map-marker-alt"></i> Location</label>
-                    <input type="text" th:field="*{location}" class="form-control" required
-                        placeholder="e.g. Hyderabad, India">
-                </div>
-
-                <div class="form-group">
-                    <label><i class="fas fa-id-card"></i> Employment Status</label>
-                    <select th:field="*{employmentStatus}" class="form-control" id="statusSelect" required>
-                        <option value="">Select Status</option>
-                        <option value="EMPLOYED">Employed</option>
-                        <option value="UNEMPLOYED">Unemployed</option>
-                        <option value="STUDENT">Student</option>
-                    </select>
-                </div>
-
-                <!-- Conditional Fields -->
-                <div id="employedFields" class="hidden">
-                    <div class="form-group">
-                        <label><i class="fas fa-building"></i> Current Company Name</label>
-                        <input type="text" th:field="*{companyName}" class="form-control" id="companyInput"
-                            placeholder="Where do you work?">
-                    </div>
-                </div>
-
-                <div id="unemployedFields" class="hidden">
-                    <div class="form-group">
-                        <label><i class="fas fa-history"></i> Previous Company Name (Optional)</label>
-                        <input type="text" th:field="*{companyName}" class="form-control"
-                            placeholder="Last company you worked for">
-                    </div>
-                </div>
-
-                <div id="studentFields" class="hidden">
-                    <div class="form-group">
-                        <label><i class="fas fa-university"></i> College Name</label>
-                        <input type="text" th:field="*{collegeName}" class="form-control" id="collegeInput"
-                            placeholder="Name of your institution">
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-graduation-cap"></i> Branch</label>
-                        <input type="text" th:field="*{branch}" class="form-control" id="branchInput"
-                            placeholder="e.g. Computer Science">
-                    </div>
-                </div>
-
-                <!-- Shared Conditional Dropdowns -->
-                <div id="experienceGroup" class="form-group hidden">
-                    <label id="experienceLabel"><i class="fas fa-clock"></i> Years of Experience</label>
-                    <select th:field="*{experience}" class="form-control" id="experienceSelect">
-                        <!-- Options filled by JS -->
-                    </select>
-                </div>
-
-                <div id="roleGroup" class="form-group hidden">
-                    <label><i class="fas fa-briefcase"></i> Role</label>
-                    <select th:field="*{jobRole}" class="form-control" id="roleSelect">
-                        <option value="">Select Role</option>
-                        <option value="Software Engineer">Software Engineer</option>
-                        <option value="Data Scientist">Data Scientist</option>
-                        <option value="Product Manager">Product Manager</option>
-                        <option value="UI/UX Designer">UI/UX Designer</option>
-                        <option value="Marketing Specialist">Marketing Specialist</option>
-                        <option value="Sales Executive">Sales Executive</option>
-                        <option value="HR Manager">HR Manager</option>
-                        <option value="Finance Analyst">Finance Analyst</option>
-                        <option value="Business Analyst">Business Analyst</option>
-                        <option value="DevOps Engineer">DevOps Engineer</option>
-                    </select>
-                </div>
-
-                <div class="grid-2">
-                    <button type="submit" class="btn btn-primary" id="saveBtn">Save Changes</button>
-                    <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'" class="btn"
-                        style="text-align: center; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; border-radius: 12px;">Cancel</a>
-                </div>
-            </form>
-        </div>
+        </main>
+    </div>
     </div>
 
     <script>
