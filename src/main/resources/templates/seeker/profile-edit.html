@@ -170,18 +170,29 @@
         function updateFields() {
             const status = statusSelect.value;
 
-            // Hide all
-            Object.values(sections).forEach(s => s.classList.add('hidden'));
+            // Hide all and disable inputs
+            Object.values(sections).forEach(s => {
+                s.classList.add('hidden');
+                s.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
+            });
             experienceGroup.classList.add('hidden');
+            document.getElementById('experienceSelect').disabled = true;
             roleGroup.classList.add('hidden');
+            document.getElementById('roleSelect').disabled = true;
 
             // Clear experience
             experienceSelect.innerHTML = '';
 
             if (status === 'EMPLOYED') {
                 sections.EMPLOYED.classList.remove('hidden');
+                sections.EMPLOYED.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+
                 experienceGroup.classList.remove('hidden');
+                document.getElementById('experienceSelect').disabled = false;
+
                 roleGroup.classList.remove('hidden');
+                document.getElementById('roleSelect').disabled = false;
+
                 document.getElementById('experienceLabel').innerHTML = '<i class="fas fa-clock"></i> Years of Experience';
 
                 for (let i = 1; i <= 20; i++) {
@@ -196,8 +207,14 @@
 
             } else if (status === 'UNEMPLOYED') {
                 sections.UNEMPLOYED.classList.remove('hidden');
+                sections.UNEMPLOYED.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+
                 experienceGroup.classList.remove('hidden');
+                document.getElementById('experienceSelect').disabled = false;
+
                 roleGroup.classList.remove('hidden');
+                document.getElementById('roleSelect').disabled = false;
+
                 document.getElementById('experienceLabel').innerHTML = '<i class="fas fa-clock"></i> Years of Experience / Type';
 
                 const types = ["Fresher", "Internship"];
@@ -215,7 +232,11 @@
 
             } else if (status === 'STUDENT') {
                 sections.STUDENT.classList.remove('hidden');
+                sections.STUDENT.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+
                 experienceGroup.classList.remove('hidden');
+                document.getElementById('experienceSelect').disabled = false;
+
                 document.getElementById('experienceLabel').innerHTML = '<i class="fas fa-clock"></i> Type';
 
                 const types = ["Fresher", "Internship"];

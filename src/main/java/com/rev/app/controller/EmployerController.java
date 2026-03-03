@@ -107,11 +107,11 @@ public class EmployerController {
     }
 
     @PostMapping("/profile")
-    public String saveProfile(@RequestParam String name,
-            @RequestParam String industry,
-            @RequestParam String description,
-            @RequestParam String website,
-            @RequestParam String location,
+    public String saveProfile(@RequestParam String companyName,
+            @RequestParam String companyIndustry,
+            @RequestParam String companyDescription,
+            @RequestParam String companyWebsite,
+            @RequestParam String companyLocation,
             @RequestParam(required = false) String personalName,
             @RequestParam(required = false) String personalPhone,
             @RequestParam(required = false) String personalLocation,
@@ -131,11 +131,11 @@ public class EmployerController {
         if (company == null) {
             company = new Company();
         }
-        company.setName(name);
-        company.setIndustry(industry);
-        company.setDescription(description);
-        company.setWebsite(website);
-        company.setLocation(location);
+        company.setName(companyName);
+        company.setIndustry(companyIndustry);
+        company.setDescription(companyDescription);
+        company.setWebsite(companyWebsite);
+        company.setLocation(companyLocation);
 
         profile.setCompany(company);
         employerService.updateProfile(profile);

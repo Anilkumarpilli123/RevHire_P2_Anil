@@ -77,32 +77,33 @@
 
                         <div class="form-group">
                             <label>Company Name</label>
-                            <input type="text" name="name" th:value="${profile.company?.name}" class="form-control"
-                                required placeholder="Your organization name">
+                            <input type="text" name="companyName" th:value="${profile.company?.name}"
+                                class="form-control" required placeholder="Your organization name">
                         </div>
 
                         <div
                             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                             <div class="form-group">
                                 <label>Industry</label>
-                                <input type="text" name="industry" th:value="${profile.company?.industry}"
+                                <input type="text" name="companyIndustry" th:value="${profile.company?.industry}"
                                     class="form-control" placeholder="e.g. Technology, Finance">
                             </div>
                             <div class="form-group">
                                 <label>Company Website</label>
-                                <input type="url" name="website" th:value="${profile.company?.website}"
+                                <input type="url" name="companyWebsite" th:value="${profile.company?.website}"
                                     class="form-control" placeholder="https://example.com">
                             </div>
                             <div class="form-group">
                                 <label>Office Location</label>
-                                <input type="text" name="location" th:value="${profile.company?.location}"
+                                <input type="text" name="companyLocation" th:value="${profile.company?.location}"
                                     class="form-control" placeholder="e.g. San Francisco, US">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label>Company Mission & Culture</label>
-                            <textarea name="description" th:text="${profile.company?.description}" class="form-control"
+                            <textarea name="companyDescription" th:text="${profile.company?.description}"
+                                class="form-control"
                                 placeholder="Tell us about your company culture, mission, and vision..."
                                 style="min-height: 120px; resize: vertical;"></textarea>
                         </div>

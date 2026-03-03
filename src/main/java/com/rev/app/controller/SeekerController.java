@@ -166,7 +166,21 @@ public class SeekerController {
         existingProfile.setPhone(profileData.getPhone());
         existingProfile.setLocation(profileData.getLocation());
         existingProfile.setEmploymentStatus(profileData.getEmploymentStatus());
-        existingProfile.setCompanyName(profileData.getCompanyName());
+
+        // Handle possible duplication from multiple hidden fields
+        String companyName = profileData.getCompanyName();
+        if (companyName != null && companyName.contains(",")) {
+            // Take the first non-empty segment
+            String[] parts = companyName.split(",");
+            for (String part : parts) {
+                if (part != null && !part.trim().isEmpty()) {
+                    companyName = part.trim();
+                    break;
+                }
+            }
+        }
+        existingProfile.setCompanyName(companyName);
+
         existingProfile.setCollegeName(profileData.getCollegeName());
         existingProfile.setBranch(profileData.getBranch());
         existingProfile.setJobRole(profileData.getJobRole());
