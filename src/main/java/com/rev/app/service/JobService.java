@@ -10,7 +10,7 @@ public interface JobService {
     Job getJobById(int id);
 
     List<Job> searchJobs(String title, String location, String skills, Integer experience, String companyName,
-            String jobType);
+            String jobType, String salaryRange, Integer daysSincePosted);
 
     Job createJob(Job job);
 

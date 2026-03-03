@@ -63,6 +63,12 @@
                             th:value="${param.companyName}">
                     </div>
                     <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Max
+                            Experience</label>
+                        <input type="number" name="experience" class="form-control" placeholder="Years"
+                            th:value="${param.experience}">
+                    </div>
+                    <div>
                         <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Job
                             Type</label>
                         <select name="jobType" class="form-control">
@@ -75,14 +81,30 @@
                             <option value="REMOTE" th:selected="${param.jobType == 'REMOTE'}">Remote</option>
                         </select>
                     </div>
-                    <div style="display: flex; gap: 1rem; align-items: flex-end;">
-                        <div style="flex: 1;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Max
-                                Exp</label>
-                            <input type="number" name="experience" class="form-control" placeholder="Years"
-                                th:value="${param.experience}">
+                    <div class="dashboard-grid"
+                        style="gap: 1.5rem; margin-top: 0; grid-template-columns: repeat(3, 1fr);">
+                        <div>
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Salary
+                                Range</label>
+                            <input type="text" name="salaryRange" class="form-control" placeholder="e.g. 100k - 150k"
+                                th:value="${param.salaryRange}">
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: auto; height: 45px;">Apply</button>
+                        <div>
+                            <label
+                                style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Posted
+                                Within</label>
+                            <select name="daysSincePosted" class="form-control">
+                                <option value="">Any Time</option>
+                                <option value="1" th:selected="${param.daysSincePosted == '1'}">Last 24 Hours</option>
+                                <option value="7" th:selected="${param.daysSincePosted == '7'}">Last 7 Days</option>
+                                <option value="30" th:selected="${param.daysSincePosted == '30'}">Last 30 Days</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; height: 45px;">Apply
+                                Filters</button>
+                        </div>
                     </div>
                 </div>
             </form>

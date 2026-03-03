@@ -114,4 +114,9 @@ public class ApplicationServiceImpl implements ApplicationService {
             updateStatus(id, status, notes);
         }
     }
+
+    @Override
+    public List<Application> searchApplications(Job job, String status, String name, String experience) {
+        return applicationRepository.searchApplications(job, status, name, experience);
+    }
 }

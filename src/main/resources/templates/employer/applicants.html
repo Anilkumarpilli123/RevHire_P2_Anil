@@ -97,6 +97,42 @@
                 </form>
             </div>
 
+            <!-- Filter Section -->
+            <div class="glass-card p-4 mb-4">
+                <form th:action="@{/employer/applicants/{jobId}(jobId=${job.id})}" method="get" class="dashboard-grid"
+                    style="gap: 1.5rem; margin-top: 0; grid-template-columns: repeat(4, 1fr);">
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Applicant
+                            Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Search by name..."
+                            th:value="${param.name}">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Status</label>
+                        <select name="status" class="form-control">
+                            <option value="">All Statuses</option>
+                            <option value="APPLIED" th:selected="${param.status == 'APPLIED'}">Applied</option>
+                            <option value="UNDER_REVIEW" th:selected="${param.status == 'UNDER_REVIEW'}">Under Review
+                            </option>
+                            <option value="SHORTLISTED" th:selected="${param.status == 'SHORTLISTED'}">Shortlisted
+                            </option>
+                            <option value="REJECTED" th:selected="${param.status == 'REJECTED'}">Rejected</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Experience</label>
+                        <input type="text" name="experience" class="form-control" placeholder="e.g. 5 years"
+                            th:value="${param.experience}">
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; height: 45px;">Filter</button>
+                    </div>
+                </form>
+            </div>
+
             <div th:each="app : ${applications}" class="applicant-card">
                 <div class="applicant-header">
                     <div style="display: flex; gap: 1rem; align-items: center;">

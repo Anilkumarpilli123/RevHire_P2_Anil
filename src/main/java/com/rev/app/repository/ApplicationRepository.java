@@ -14,5 +14,15 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 
     List<Application> findByJob(Job job);
 
+    @org.springframework.data.jpa.repository.Query("SELECT a FROM Application a WHERE a.job = :job AND " +
+            "(:status IS NULL OR a.status = :status) AND " +
+            "(:name IS NULL OR LOWER(a.jobSeeker.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
+            "(:experience IS NULL OR a.jobSeeker.experience LIKE CONCAT('%', :experience, '%'))")
+    List<Application> searchApplications(
+            @org.springframework.data.repository.query.Param("job") Job job,
+            @org.springframework.data.repository.query.Param("status") String status,
+            @org.springframework.data.repository.query.Param("name") String name,
+            @org.springframework.data.repository.query.Param("experience") String experience);
+
     Boolean existsByJobAndJobSeeker(Job job, JobSeekerProfile jobSeeker);
 }

@@ -17,5 +17,7 @@ public interface ApplicationService {
 
     void bulkUpdateStatus(List<Integer> applicationIds, String status, String notes);
 
+    List<Application> searchApplications(Job job, String status, String name, String experience);
+
     void withdrawApplication(int applicationId, String reason);
 }

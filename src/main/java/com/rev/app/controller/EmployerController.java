@@ -171,9 +171,20 @@ public class EmployerController {
     }
 
     @GetMapping("/applicants/{jobId}")
-    public String viewApplicants(@PathVariable int jobId, Model model) {
+    public String viewApplicants(@PathVariable int jobId,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String experience,
+            Model model) {
         Job job = jobService.getJobById(jobId);
-        List<Application> applications = applicationService.getApplicationsByJob(job);
+        List<Application> applications;
+
+        if (status != null || name != null || experience != null) {
+            applications = applicationService.searchApplications(job, status, name, experience);
+        } else {
+            applications = applicationService.getApplicationsByJob(job);
+        }
+
         System.out.println("DEBUG: viewApplicants for jobId=" + jobId + ", found " + applications.size() + " apps");
         model.addAttribute("job", job);
         model.addAttribute("applications", applications);

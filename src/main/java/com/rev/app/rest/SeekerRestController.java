@@ -53,8 +53,10 @@ public class SeekerRestController {
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String location,
             @RequestParam(required = false) String skills,
-            @RequestParam(required = false) Integer experience) {
-        return jobService.searchJobs(title, location, skills, experience, null, null)
+            @RequestParam(required = false) Integer experience,
+            @RequestParam(required = false) String salaryRange,
+            @RequestParam(required = false) Integer daysSincePosted) {
+        return jobService.searchJobs(title, location, skills, experience, null, null, salaryRange, daysSincePosted)
                 .stream().map(jobMapper::toDto).collect(Collectors.toList());
     }
 

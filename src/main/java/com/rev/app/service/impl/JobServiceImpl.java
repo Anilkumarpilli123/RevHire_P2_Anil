@@ -37,7 +37,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Job> getAllOpenJobs() {
-        return jobRepository.searchJobs(null, null, null, null, null, null);
+        return jobRepository.searchJobs(null, null, null, null, null, null, null, null);
     }
 
     @Override
@@ -48,8 +48,13 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Job> searchJobs(String title, String location, String skills, Integer experience, String companyName,
-            String jobType) {
-        return jobRepository.searchJobs(title, location, skills, experience, companyName, jobType);
+            String jobType, String salaryRange, Integer daysSincePosted) {
+        java.time.LocalDateTime postedSince = null;
+        if (daysSincePosted != null) {
+            postedSince = java.time.LocalDateTime.now().minusDays(daysSincePosted);
+        }
+        return jobRepository.searchJobs(title, location, skills, experience, companyName, jobType, salaryRange,
+                postedSince);
     }
 
     @Override

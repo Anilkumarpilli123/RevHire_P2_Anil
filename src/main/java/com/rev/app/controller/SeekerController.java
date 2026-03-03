@@ -182,7 +182,9 @@ public class SeekerController {
             @RequestParam(required = false) String location,
             @RequestParam(required = false) String companyName,
             @RequestParam(required = false) String jobType,
-            @RequestParam(required = false) Integer experience) {
+            @RequestParam(required = false) Integer experience,
+            @RequestParam(required = false) String salaryRange,
+            @RequestParam(required = false) Integer daysSincePosted) {
 
         User user = userRepository.findByEmail(auth.getName()).get();
         JobSeekerProfile profile = getOrCreateProfile(user);
@@ -191,8 +193,10 @@ public class SeekerController {
         }
 
         List<Job> jobs;
-        if (title != null || location != null || companyName != null || jobType != null || experience != null) {
-            jobs = jobService.searchJobs(title, location, null, experience, companyName, jobType);
+        if (title != null || location != null || companyName != null || jobType != null || experience != null
+                || salaryRange != null || daysSincePosted != null) {
+            jobs = jobService.searchJobs(title, location, null, experience, companyName, jobType, salaryRange,
+                    daysSincePosted);
         } else {
             jobs = jobService.getAllOpenJobs();
         }

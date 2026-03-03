@@ -41,7 +41,8 @@
                 Applications</a>
             <a href="/seeker/resume" th:classappend="${activePage == 'resume' ? 'active' : ''}">My Resume</a>
             <a href="/seeker/notifications" th:classappend="${activePage == 'notifications' ? 'active' : ''}">
-                Notifications <span th:if="${unreadCount > 0}" class="unread-badge" th:text="${unreadCount}">0</span>
+                Notifications <span id="notifBadge" class="unread-badge"
+                    th:style="${unreadCount > 0 ? '' : 'display: none;'}" th:text="${unreadCount}">0</span>
             </a>
         </nav>
 
@@ -74,7 +75,8 @@
             <a href="/employer/jobs/new" th:classappend="${activePage == 'post-job' ? 'active' : ''}">Post a Job</a>
             <a href="/employer/profile" th:classappend="${activePage == 'profile' ? 'active' : ''}">My Profile</a>
             <a href="/employer/notifications" th:classappend="${activePage == 'notifications' ? 'active' : ''}">
-                Notifications <span th:if="${unreadCount > 0}" class="unread-badge" th:text="${unreadCount}">0</span>
+                Notifications <span id="notifBadge" class="unread-badge"
+                    th:style="${unreadCount > 0 ? '' : 'display: none;'}" th:text="${unreadCount}">0</span>
             </a>
         </nav>
 

@@ -77,7 +77,7 @@ class SeekerRestControllerTest {
     @Test
     @WithMockUser(roles = "SEEKER")
     void searchJobs_Success() throws Exception {
-        when(jobService.searchJobs("Java", null, null, null, null, null)).thenReturn(Arrays.asList(
+        when(jobService.searchJobs("Java", null, null, null, null, null, null, null)).thenReturn(Arrays.asList(
                 Job.builder().title("Java Dev").build()));
         when(jobMapper.toDto(any())).thenReturn(JobDto.builder().title("Java Dev").build());
 

@@ -9984,3 +9984,209 @@ This generated password is for development use only. Your security configuration
 2026-03-03 14:11:51.730 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-03-03 14:11:51.739 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2026-03-03 14:11:51.742 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-03 14:34:04.560 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.rest.EmployerRestControllerTest]: EmployerRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:04.756 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.rest.EmployerRestControllerTest
+2026-03-03 14:34:04.857 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:05.224 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.2.Final
+2026-03-03 14:34:05.302 [main] INFO  com.rev.app.rest.EmployerRestControllerTest - Starting EmployerRestControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:05.310 [main] DEBUG com.rev.app.rest.EmployerRestControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:05.311 [main] INFO  com.rev.app.rest.EmployerRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:07.949 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:08.497 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: c902ca65-5284-4931-a17f-4798b637219a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:08.531 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:08.797 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:08.797 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:08.800 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 1 ms
+2026-03-03 14:34:08.843 [main] INFO  com.rev.app.rest.EmployerRestControllerTest - Started EmployerRestControllerTest in 3.995 seconds (process running for 5.815)
+2026-03-03 14:34:09.227 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.rest.AuthRestControllerTest]: AuthRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:09.247 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.rest.AuthRestControllerTest
+2026-03-03 14:34:09.252 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:09.289 [main] INFO  com.rev.app.rest.AuthRestControllerTest - Starting AuthRestControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:09.290 [main] DEBUG com.rev.app.rest.AuthRestControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:09.291 [main] INFO  com.rev.app.rest.AuthRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:09.603 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:09.686 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 0b09ba8a-2da2-4ed5-bc98-73edb04bfd8b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:09.687 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:09.713 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:09.713 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:09.713 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms
+2026-03-03 14:34:09.725 [main] INFO  com.rev.app.rest.AuthRestControllerTest - Started AuthRestControllerTest in 0.472 seconds (process running for 6.697)
+2026-03-03 14:34:09.904 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.rest.SeekerRestControllerTest]: SeekerRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:09.919 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.rest.SeekerRestControllerTest
+2026-03-03 14:34:09.987 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:10.102 [main] INFO  com.rev.app.rest.SeekerRestControllerTest - Starting SeekerRestControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:10.103 [main] DEBUG com.rev.app.rest.SeekerRestControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:10.104 [main] INFO  com.rev.app.rest.SeekerRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:10.608 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:10.681 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 7881eb0c-7dd4-4b92-a16f-49113c708392
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:10.683 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:10.702 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:10.702 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:10.702 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms
+2026-03-03 14:34:10.712 [main] INFO  com.rev.app.rest.SeekerRestControllerTest - Started SeekerRestControllerTest in 0.776 seconds (process running for 7.684)
+2026-03-03 14:34:10.818 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.rest.NotificationRestControllerTest]: NotificationRestControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:10.835 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.rest.NotificationRestControllerTest
+2026-03-03 14:34:10.843 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:10.874 [main] INFO  com.rev.app.rest.NotificationRestControllerTest - Starting NotificationRestControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:10.875 [main] DEBUG com.rev.app.rest.NotificationRestControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:10.875 [main] INFO  com.rev.app.rest.NotificationRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:11.180 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:11.247 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: f8c24dd6-659f-425e-b884-36bc6686d513
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:11.250 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:11.269 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:11.269 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:11.271 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms
+2026-03-03 14:34:11.282 [main] INFO  com.rev.app.rest.NotificationRestControllerTest - Started NotificationRestControllerTest in 0.44 seconds (process running for 8.254)
+2026-03-03 14:34:12.068 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.ApplicationRepositoryTest]: ApplicationRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:12.097 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.ApplicationRepositoryTest
+2026-03-03 14:34:12.100 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:12.129 [main] INFO  com.rev.app.repository.ApplicationRepositoryTest - Starting ApplicationRepositoryTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:12.130 [main] DEBUG com.rev.app.repository.ApplicationRepositoryTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:12.130 [main] INFO  com.rev.app.repository.ApplicationRepositoryTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:12.333 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-03 14:34:12.424 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 76 ms. Found 9 JPA repository interfaces.
+2026-03-03 14:34:12.490 [main] INFO  org.springframework.boot.test.autoconfigure.jdbc.TestDatabaseAutoConfiguration$EmbeddedDataSourceBeanFactoryPostProcessor - Replacing 'dataSource' DataSource bean with embedded version
+2026-03-03 14:34:12.554 [main] INFO  org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory - Starting embedded database: url='jdbc:h2:mem:d876ec89-143f-4bca-9255-e4bd2b63f661;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false', username='sa'
+2026-03-03 14:34:12.936 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-03 14:34:13.046 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2026-03-03 14:34:13.094 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-03 14:34:13.274 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-03 14:34:13.345 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-03 14:34:13.380 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory$EmbeddedDataSourceProxy@66a5a12c']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-03 14:34:14.607 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-03 14:34:14.712 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-03 14:34:15.229 [main] INFO  org.springframework.data.jpa.repository.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-03 14:34:16.776 [main] INFO  com.rev.app.repository.ApplicationRepositoryTest - Started ApplicationRepositoryTest in 4.676 seconds (process running for 13.749)
+2026-03-03 14:34:17.074 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.NotificationRepositoryTest]: NotificationRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.086 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.NotificationRepositoryTest
+2026-03-03 14:34:17.124 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.UserRepositoryTest]: UserRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.139 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.UserRepositoryTest
+2026-03-03 14:34:17.175 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.CompanyRepositoryTest]: CompanyRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.185 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.CompanyRepositoryTest
+2026-03-03 14:34:17.212 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.EmployerRepositoryTest]: EmployerRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.224 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.EmployerRepositoryTest
+2026-03-03 14:34:17.264 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.ResumeRepositoryTest]: ResumeRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.275 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.ResumeRepositoryTest
+2026-03-03 14:34:17.302 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.JobRepositoryTest]: JobRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.317 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.JobRepositoryTest
+2026-03-03 14:34:17.365 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.JobSeekerRepositoryTest]: JobSeekerRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.380 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.JobSeekerRepositoryTest
+2026-03-03 14:34:17.402 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.repository.FavoriteJobRepositoryTest]: FavoriteJobRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.413 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.repository.FavoriteJobRepositoryTest
+2026-03-03 14:34:17.463 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.controller.SeekerControllerTest]: SeekerControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:17.486 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.controller.SeekerControllerTest
+2026-03-03 14:34:17.491 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:17.515 [main] INFO  com.rev.app.controller.SeekerControllerTest - Starting SeekerControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:17.516 [main] DEBUG com.rev.app.controller.SeekerControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:17.516 [main] INFO  com.rev.app.controller.SeekerControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:17.718 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:17.798 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 19599c3d-16ac-4bd7-aeaf-35bdc02c10dc
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:17.799 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:17.816 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:17.816 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:17.818 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 2 ms
+2026-03-03 14:34:17.827 [main] INFO  com.rev.app.controller.SeekerControllerTest - Started SeekerControllerTest in 0.336 seconds (process running for 14.799)
+2026-03-03 14:34:18.248 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.controller.AuthControllerTest]: AuthControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:18.261 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.controller.AuthControllerTest
+2026-03-03 14:34:18.264 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:18.298 [main] INFO  com.rev.app.controller.AuthControllerTest - Starting AuthControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:18.300 [main] DEBUG com.rev.app.controller.AuthControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:18.300 [main] INFO  com.rev.app.controller.AuthControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:18.529 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:18.577 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 63888726-2c73-4c53-8c4d-bc501be3d261
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:18.580 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:18.597 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:18.597 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:18.597 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms
+2026-03-03 14:34:18.607 [main] INFO  com.rev.app.controller.AuthControllerTest - Started AuthControllerTest in 0.343 seconds (process running for 15.579)
+2026-03-03 14:34:18.672 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.controller.EmployerControllerTest]: EmployerControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:18.682 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.controller.EmployerControllerTest
+2026-03-03 14:34:18.686 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:18.710 [main] INFO  com.rev.app.controller.EmployerControllerTest - Starting EmployerControllerTest using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:18.712 [main] DEBUG com.rev.app.controller.EmployerControllerTest - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:18.712 [main] INFO  com.rev.app.controller.EmployerControllerTest - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:18.889 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:18.956 [main] WARN  org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 51889dee-2adf-41f1-905e-edab7bce8a8c
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-03-03 14:34:18.959 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-03-03 14:34:18.976 [main] INFO  org.springframework.boot.test.mock.web.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2026-03-03 14:34:18.976 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''
+2026-03-03 14:34:18.977 [main] INFO  org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms
+2026-03-03 14:34:18.984 [main] INFO  com.rev.app.controller.EmployerControllerTest - Started EmployerControllerTest in 0.298 seconds (process running for 15.956)
+2026-03-03 14:34:19.063 [main] INFO  org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.rev.app.RevHireP2ApplicationTests]: RevHireP2ApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-03-03 14:34:19.088 [main] INFO  org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.rev.app.RevHireP2Application for test class com.rev.app.RevHireP2ApplicationTests
+2026-03-03 14:34:19.101 [main] INFO  org.springframework.boot.devtools.restart.RestartApplicationListener - Restart disabled due to context in which it is running
+2026-03-03 14:34:19.128 [main] INFO  com.rev.app.RevHireP2ApplicationTests - Starting RevHireP2ApplicationTests using Java 17.0.17 with PID 23640 (started by anilk in C:\Users\anilk\Documents\workspace-spring-tools-for-eclipse-5.0.1.RELEASE\P2_RevHire)
+2026-03-03 14:34:19.130 [main] DEBUG com.rev.app.RevHireP2ApplicationTests - Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-03-03 14:34:19.130 [main] INFO  com.rev.app.RevHireP2ApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2026-03-03 14:34:19.679 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-03 14:34:19.715 [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 9 JPA repository interfaces.
+2026-03-03 14:34:20.130 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-03 14:34:20.314 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn17: url=jdbc:h2:mem:9aef4a56-5479-46f2-9c8e-f5a6f20f9fc4 user=SA
+2026-03-03 14:34:20.316 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-03 14:34:20.358 [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-03 14:34:20.375 [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-03 14:34:20.394 [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-03 14:34:20.395 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-03 14:34:20.396 [main] INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-03-03 14:34:20.563 [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-03 14:34:20.586 [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-03 14:34:20.795 [main] INFO  org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-03-03 14:34:21.016 [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-03 14:34:21.163 [main] INFO  org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2026-03-03 14:34:21.508 [main] INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 1 endpoint beneath base path '/actuator'
+2026-03-03 14:34:22.321 [main] INFO  com.rev.app.RevHireP2ApplicationTests - Started RevHireP2ApplicationTests in 3.218 seconds (process running for 19.293)
+2026-03-03 14:34:22.353 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-03 14:34:22.385 [SpringApplicationShutdownHook] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-03 14:34:22.394 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-03 14:34:22.397 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-03 14:42:16.674 [http-nio-8081-exec-4] INFO  com.rev.app.controller.AuthController - Registration attempt for email: priya@gmail.com, role: employer
+2026-03-03 14:42:17.117 [http-nio-8081-exec-4] INFO  com.rev.app.controller.AuthController - Registration successful for: priya@gmail.com

@@ -50,4 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         }, 4500);
     });
+
+    // Notification Polling
+    function updateNotificationBadge() {
+        const badge = document.getElementById('notifBadge');
+        if (!badge) return;
+
+        fetch('/api/notifications/unread-count')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const count = data.data;
+                    if (count > 0) {
+                        badge.textContent = count;
+                        badge.style.display = 'flex';
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                }
+            })
+            .catch(err => console.error('Error fetching unread count:', err));
+    }
+
+    // Initial call and set interval
+    updateNotificationBadge();
+    setInterval(updateNotificationBadge, 30000); // Poll every 30 seconds
 });

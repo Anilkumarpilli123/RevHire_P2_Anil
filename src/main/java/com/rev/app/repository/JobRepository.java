@@ -19,13 +19,18 @@ public interface JobRepository extends JpaRepository<Job, Integer> {
                         "(:companyName IS NULL OR LOWER(j.company.name) LIKE LOWER(CONCAT('%', :companyName, '%'))) AND "
                         +
                         "(:jobType IS NULL OR LOWER(j.jobType) = LOWER(:jobType)) AND " +
+                        "(:salaryRange IS NULL OR LOWER(j.salaryRange) LIKE LOWER(CONCAT('%', :salaryRange, '%'))) AND "
+                        +
+                        "(:postedSince IS NULL OR j.createdAt >= :postedSince) AND " +
                         "(j.status = 'OPEN')")
         List<Job> searchJobs(@Param("title") String title,
                         @Param("location") String location,
                         @Param("skills") String skills,
                         @Param("experience") Integer experience,
                         @Param("companyName") String companyName,
-                        @Param("jobType") String jobType);
+                        @Param("jobType") String jobType,
+                        @Param("salaryRange") String salaryRange,
+                        @Param("postedSince") java.time.LocalDateTime postedSince);
 
         List<Job> findByCompany_Id(int companyId);
 
