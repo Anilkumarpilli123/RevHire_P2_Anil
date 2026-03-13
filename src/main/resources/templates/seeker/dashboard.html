@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .stat-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .stat-card p {
+            color: #94a3b8;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container">
+        <div th:replace="~{common/fragments :: seeker-sidebar('dashboard')}"></div>
+
+        <main class="main-content">
+            <header>
+                <h1>Welcome Back, <span th:text="${profile != null ? profile.name : 'User'}">John</span>!</h1>
+                <p style="color: #94a3b8;">Track your career progress and new opportunities.</p>
+            </header>
+
+            <div th:if="${param.success}" class="alert alert-success"
+                style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem; margin-top: 2rem;">
+                <p th:if="${param.success[0] == 'profile_updated'}">Profile updated successfully!</p>
+                <p th:if="${param.success[0] == 'applied'}">Job application submitted successfully!</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="glass-container stat-card">
+                    <h3 th:text="${appliedJobs}">0</h3>
+                    <p>Applied Jobs</p>
+                </div>
+                <div class="glass-container stat-card">
+                    <h3 th:text="${shortlisted}">0</h3>
+                    <p>Shortlisted</p>
+                </div>
+                <div class="glass-container stat-card" style="cursor: pointer;"
+                    onclick="window.location.href='/seeker/notifications'">
+                    <h3 th:text="${unreadCount ?: 0}">0</h3>
+                    <p>New Notifications</p>
+                </div>
+            </div>
+
+            <section style="margin-top: 4rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                    <h2>Recommended Jobs</h2>
+                    <a href="/seeker/jobs" style="color: var(--primary); text-decoration: none;">View All</a>
+                </div>
+
+                <div class="glass-container" style="padding: 3rem; text-align: center;">
+                    <p style="color: #94a3b8;">No specific recommendations yet. Complete your resume to get better
+                        matches!</p>
+                    <a href="/seeker/resume" class="btn btn-primary"
+                        style="display: inline-block; width: auto; margin-top: 1.5rem;">Update Resume</a>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .job-item {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .job-info h4 {
+            margin-top: 0;
+            color: white;
+        }
+
+        .job-info p {
+            margin-bottom: 0;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container">
+        <div th:replace="~{common/fragments :: employer-sidebar('dashboard')}"></div>
+
+        <main class="main-content">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem;">
+                <div>
+                    <h1>Employer Dashboard</h1>
+                    <p style="color: #94a3b8;" th:if="${profile.company != null}" th:text="${profile.company.name}">
+                        Managing TechCorp Inc.</p>
+                </div>
+                <a href="/employer/jobs/new" class="btn btn-primary" style="width: auto; padding: 0.8rem 2rem;">Post New
+                    Job</a>
+            </div>
+
+            <div th:if="${param.success}" class="alert alert-success"
+                style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                <p th:if="${param.success[0] == 'profile_updated'}">Company profile updated successfully!</p>
+                <p th:if="${param.success[0] == 'job_posted'}">Job opportunity published successfully!</p>
+                <p th:if="${param.success[0] == 'job_updated'}">Job updated successfully!</p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="glass-container" style="padding: 2rem; text-align: center;">
+                    <h3 style="font-size: 2.5rem; color: var(--primary);" th:text="${jobCount ?: 0}">0</h3>
+                    <p style="color: #94a3b8;">Active Postings</p>
+                </div>
+                <div class="glass-container" style="padding: 2rem; text-align: center;">
+                    <h3 style="font-size: 2.5rem; color: var(--primary);" th:text="${totalApplications ?: 0}">0</h3>
+                    <p style="color: #94a3b8;">Total Applicants</p>
+                </div>
+                <div class="glass-container" style="padding: 2rem; text-align: center;">
+                    <h3 style="font-size: 2.5rem; color: var(--primary);" th:text="${totalPending ?: 0}">0</h3>
+                    <p style="color: #94a3b8;">Pending Reviews</p>
+                </div>
+            </div>
+
+            <div th:if="${profile.company == null}" class="glass-container" style="text-align: center; padding: 4rem;">
+                <h3>Step 1: Create Company Profile</h3>
+                <p style="color: #94a3b8; margin: 1.5rem 0;">You need to link your account to a company before posting
+                    jobs.</p>
+                <a href="/employer/profile" class="btn btn-primary" style="width: auto;">Configure Profile</a>
+            </div>
+
+            <div th:if="${profile.company != null}">
+                <h3 style="margin-bottom: 1.5rem;">Active Job Postings</h3>
+                <div th:each="job : ${jobs}" class="job-item">
+                    <div class="job-info">
+                        <h4 th:text="${job.title}">Senior Backend Engineer</h4>
+                        <p th:text="${'Posted on: ' + #temporals.format(job.createdAt, 'dd MMM yyyy')}">Posted on: 12
+                            Oct 2026</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <a th:href="@{'/employer/applicants/' + ${job.id}}" class="btn btn-outline"
+                            style="width: auto; border: 1px solid var(--glass-border); font-size: 0.9rem; background-color: aliceblue;">View
+                            Applicants</a>
+                        <a th:href="@{'/employer/jobs/edit/' + ${job.id}}" class="btn btn-outline"
+                            style="width: auto; border: 1px solid var(--glass-border); font-size: 0.9rem; background-color: aliceblue;">Edit</a>
+                    </div>
+                </div>
+                <div th:if="${jobs.empty}" style="text-align: center; padding: 3rem; color: #94a3b8;">
+                    No jobs posted yet. Start hiring today!
+                </div>
+            </div>
+        </main>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

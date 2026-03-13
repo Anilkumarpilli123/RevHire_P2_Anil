@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .auth-page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .role-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-option {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: var(--glass);
+        }
+
+        .role-option.active {
+            border-color: var(--primary);
+            background: RGBA(249, 115, 22, 0.2);
+        }
+
+        input[type="radio"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-page">
+        <div class="glass-container auth-card">
+            <div class="auth-header">
+                <a href="/" style="text-decoration: none;">
+                    <h2 class="logo"
+                        style="background: linear-gradient(to right, var(--primary), var(--secondary));-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700;">
+                        RevHire</h2>
+                </a>
+                <h2>Create Account</h2>
+                <p>Join our community of professionals</p>
+            </div>
+
+            <div th:if="${error}" class="alert error-text" style="text-align: center; margin-bottom: 1rem;"
+                th:text="${error}"></div>
+
+            <form th:action="@{/register}" th:object="${signupRequest}" method="post">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="John Doe" required>
+                    <p th:if="${#fields.hasErrors('name')}" class="error-text" th:errors="*{name}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" th:field="*{email}" class="form-control" placeholder="john@example.com"
+                        required>
+                    <p th:if="${#fields.hasErrors('email')}" class="error-text" th:errors="*{email}"></p>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" th:field="*{password}" class="form-control" placeholder="••••••••" required>
+                    <p th:if="${#fields.hasErrors('password')}" class="error-text" th:errors="*{password}"></p>
+                </div>
+
+                <label style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #94a3b8;">Register
+                    as:</label>
+                <div class="role-selector">
+                    <label class="role-option" id="seeker-label">
+                        <input type="radio" th:field="*{role}" value="seeker" checked onclick="selectRole('seeker')">
+                        Job Seeker
+                    </label>
+                    <label class="role-option" id="employer-label">
+                        <input type="radio" th:field="*{role}" value="employer" onclick="selectRole('employer')">
+                        Employer
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="/login">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function selectRole(role) {
+            document.getElementById('seeker-label').classList.remove('active');
+            document.getElementById('employer-label').classList.remove('active');
+            document.getElementById(role + '-label').classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

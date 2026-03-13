@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-APPLIED {
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
+
+        .status-SHORTLISTED {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+        }
+
+        .status-REJECTED {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        .status-WITHDRAWN {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container">
+        <div th:replace="~{common/fragments :: seeker-sidebar('applications')}"></div>
+
+        <main class="main-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h1>My Applications</h1>
+                    <p style="color: #94a3b8;">Keep track of your active job applications.</p>
+                </div>
+            </div>
+
+            <div th:if="${param.success}" class="glass-container"
+                style="padding: 1rem; margin-bottom: 2rem; border-color: var(--success);">
+                <p th:if="${param.success[0] == 'applied'}" style="color: var(--success);">Application submitted
+                    successfully!</p>
+                <p th:if="${param.success[0] == 'withdrawn'}" style="color: #94a3b8;">Application withdrawn.</p>
+            </div>
+
+            <div th:each="app : ${applications}" class="job-card-compact">
+                <div class="job-card-info">
+                    <div style="display: flex; align-items: baseline;">
+                        <h4 th:text="${app.job.title}">Software Engineer</h4>
+                        <span class="company" th:text="${app.job.company.name}"
+                            style="margin-left: 1rem;">TechCorp</span>
+                    </div>
+                    <div class="job-card-meta">
+                        <span><i class="far fa-calendar-check"></i> Applied on: <span
+                                th:text="${#temporals.format(app.appliedDate, 'dd MMM yyyy')}">12 Oct 2023</span></span>
+                    </div>
+                </div>
+                <div class="job-card-actions">
+                    <div th:class="'status-badge status-' + ${app.status}" th:text="${app.status}">APPLIED</div>
+                    <form th:if="${app.status == 'APPLIED'}" th:action="@{'/seeker/applications/withdraw/' + ${app.id}}"
+                        method="post" style="display: inline;">
+                        <button type="submit" class="btn"
+                            style="background: transparent; color: #f87171; border: 1px solid #f87171; width: auto; padding: 0.4rem 1rem; font-size: 0.8rem;">Withdraw</button>
+                    </form>
+                </div>
+            </div>
+
+            <div th:if="${applications.empty}" class="glass-container" style="padding: 4rem; text-align: center;">
+                <p style="color: #94a3b8;">You haven't applied to any jobs yet.</p>
+                <a href="/seeker/jobs" class="btn btn-primary"
+                    style="display: inline-block; width: auto; margin-top: 1.5rem;">Browse Jobs</a>
+            </div>
+        </main>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

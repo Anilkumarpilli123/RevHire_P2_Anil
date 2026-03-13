@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+
+    <div class="container">
+        <div th:replace="~{common/fragments :: seeker-sidebar('profile')}"></div>
+
+        <main class="main-content">
+            <div class="profile-edit-container">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'"
+                        style="color: #94a3b8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-arrow-left"></i>
+                        <span th:text="${profile.isComplete()} ? 'Back to Profile' : 'Back to Dashboard'">Back</span>
+                    </a>
+                </header>
+
+                <div class="glass-container">
+                    <h1 style="margin-bottom: 0.5rem;">Update Your Details</h1>
+                    <p style="color: #94a3b8; margin-bottom: 2.5rem;">Keep your professional information up to date.</p>
+
+                    <div th:if="${param.message != null and param.message[0] == 'complete_profile_first'}"
+                        style="background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); color: #60a5fa; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                        Please complete your profile details first to unlock all features.
+                    </div>
+
+                    <form th:action="@{/seeker/profile}" th:object="${profile}" method="post" id="profileForm"
+                        autocomplete="off">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" th:field="*{name}" class="form-control" required
+                                    placeholder="Enter your full name">
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email Address (Read-only)</label>
+                                <input type="email" th:value="${email}" class="form-control" readonly
+                                    style="opacity: 0.7; cursor: not-allowed;">
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Phone Number</label>
+                                <input type="tel" th:field="*{phone}" class="form-control" required
+                                    placeholder="e.g. +91 9876543210">
+                            </div>
+
+                            <div class="form-group">
+                                <label><i class="fas fa-map-marker-alt"></i> Location</label>
+                                <input type="text" th:field="*{location}" class="form-control" required
+                                    placeholder="e.g. Hyderabad, India">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="max-width: 400px; margin-bottom: 2.5rem;">
+                            <label><i class="fas fa-id-card"></i> Employment Status</label>
+                            <select th:field="*{employmentStatus}" class="form-control" id="statusSelect" required>
+                                <option value="">Select Status</option>
+                                <option value="EMPLOYED">Employed</option>
+                                <option value="UNEMPLOYED">Unemployed</option>
+                                <option value="STUDENT">Student</option>
+                            </select>
+                        </div>
+
+                        <!-- Conditional Fields -->
+                        <div id="employedFields" class="hidden">
+                            <div class="form-group">
+                                <label><i class="fas fa-building"></i> Current Company Name</label>
+                                <input type="text" th:field="*{companyName}" class="form-control" id="companyInput"
+                                    placeholder="Where do you work?">
+                            </div>
+                        </div>
+
+                        <div id="unemployedFields" class="hidden">
+                            <div class="form-group">
+                                <label><i class="fas fa-history"></i> Previous Company Name (Optional)</label>
+                                <input type="text" th:field="*{companyName}" class="form-control"
+                                    placeholder="Last company you worked for">
+                            </div>
+                        </div>
+
+                        <div id="studentFields" class="hidden">
+                            <div
+                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                <div class="form-group">
+                                    <label><i class="fas fa-university"></i> College Name</label>
+                                    <input type="text" th:field="*{collegeName}" class="form-control" id="collegeInput"
+                                        placeholder="Name of your institution">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-graduation-cap"></i> Branch</label>
+                                    <input type="text" th:field="*{branch}" class="form-control" id="branchInput"
+                                        placeholder="e.g. Computer Science">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Shared Conditional Dropdowns -->
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div id="experienceGroup" class="form-group hidden">
+                                <label id="experienceLabel"><i class="fas fa-clock"></i> Years of Experience</label>
+                                <select th:field="*{experience}" class="form-control" id="experienceSelect">
+                                    <!-- Options filled by JS -->
+                                </select>
+                            </div>
+
+                            <div id="roleGroup" class="form-group hidden">
+                                <label><i class="fas fa-briefcase"></i> Role</label>
+                                <select th:field="*{jobRole}" class="form-control" id="roleSelect">
+                                    <option value="">Select Role</option>
+                                    <option value="Software Engineer">Software Engineer</option>
+                                    <option value="Data Scientist">Data Scientist</option>
+                                    <option value="Product Manager">Product Manager</option>
+                                    <option value="UI/UX Designer">UI/UX Designer</option>
+                                    <option value="Marketing Specialist">Marketing Specialist</option>
+                                    <option value="Sales Executive">Sales Executive</option>
+                                    <option value="HR Manager">HR Manager</option>
+                                    <option value="Finance Analyst">Finance Analyst</option>
+                                    <option value="Business Analyst">Business Analyst</option>
+                                    <option value="DevOps Engineer">DevOps Engineer</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 3.5rem;">
+                            <button type="submit" class="btn btn-primary" style="flex: 2; padding: 1rem;">Save
+                                Changes</button>
+                            <a th:href="${profile.isComplete()} ? '/seeker/profile' : '/seeker/dashboard'" class="btn"
+                                style="flex: 1; background: rgba(255,255,255,0.05); text-align: center; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    </div>
+
+    <script>
+        const statusSelect = document.getElementById('statusSelect');
+        const experienceSelect = document.getElementById('experienceSelect');
+        const experienceGroup = document.getElementById('experienceGroup');
+        const roleGroup = document.getElementById('roleGroup');
+        const profileForm = document.getElementById('profileForm');
+
+        const sections = {
+            EMPLOYED: document.getElementById('employedFields'),
+            UNEMPLOYED: document.getElementById('unemployedFields'),
+            STUDENT: document.getElementById('studentFields')
+        };
+
+        function updateFields() {
+            const status = statusSelect.value;
+
+            // Hide all and disable inputs
+            Object.values(sections).forEach(s => {
+                s.classList.add('hidden');
+                s.querySelectorAll('input, select, textarea').forEach(input => input.disabled = true);
+            });
+            experienceGroup.classList.add('hidden');
+            document.getElementById('experienceSelect').disabled = true;
+            roleGroup.classList.add('hidden');
+            document.getElementById('roleSelect').disabled = true;
+
+            // Clear experience
+            experienceSelect.innerHTML = '';
+
+            if (status === 'EMPLOYED') {
+                sections.EMPLOYED.classList.remove('hidden');
+                sections.EMPLOYED.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+
+                experienceGroup.classList.remove('hidden');
+                document.getElementById('experienceSelect').disabled = false;
+
+                roleGroup.classList.remove('hidden');
+                document.getElementById('roleSelect').disabled = false;
+
+                document.getElementById('experienceLabel').innerHTML = '<i class="fas fa-clock"></i> Years of Experience';
+
+                for (let i = 1; i <= 20; i++) {
+                    const opt = document.createElement('option');
+                    opt.value = i + (i === 1 ? " Year" : " Years");
+                    opt.text = i + (i === 1 ? " Year" : " Years");
+                    experienceSelect.appendChild(opt);
+                }
+
+                document.getElementById('companyInput').required = true;
+                document.getElementById('roleSelect').required = true;
+
+            } else if (status === 'UNEMPLOYED') {
+                sections.UNEMPLOYED.classList.remove('hidden');
+                sections.UNEMPLOYED.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+
+                experienceGroup.classList.remove('hidden');
+                document.getElementById('experienceSelect').disabled = false;
+
+                roleGroup.classList.remove('hidden');
+                document.getElementById('roleSelect').disabled = false;
+
+                document.getElementById('experienceLabel').innerHTML = '<i class="fas fa-clock"></i> Years of Experience / Type';
+
+                const types = ["Fresher", "Internship"];
+                types.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t; opt.text = t;
+                    experienceSelect.appendChild(opt);
+                });
+                for (let i = 1; i <= 10; i++) {
+                    const opt = document.createElement('option');
+                    opt.value = i + (i === 1 ? " Year" : " Years");
+                    opt.text = i + (i === 1 ? " Year" : " Years");
+                    experienceSelect.appendChild(opt);
+                }
+
+            } else if (status === 'STUDENT') {
+                sections.STUDENT.classList.remove('hidden');
+                sections.STUDENT.querySelectorAll('input, select, textarea').forEach(input => input.disabled = false);
+
+                experienceGroup.classList.remove('hidden');
+                document.getElementById('experienceSelect').disabled = false;
+
+                document.getElementById('experienceLabel').innerHTML = '<i class="fas fa-clock"></i> Type';
+
+                const types = ["Fresher", "Internship"];
+                types.forEach(t => {
+                    const opt = document.createElement('option');
+                    opt.value = t; opt.text = t;
+                    experienceSelect.appendChild(opt);
+                });
+
+                document.getElementById('collegeInput').required = true;
+                document.getElementById('branchInput').required = true;
+            }
+
+            handleRoleMandatory();
+        }
+
+        function handleRoleMandatory() {
+            const status = statusSelect.value;
+            const exp = experienceSelect.value;
+            const roleSelect = document.getElementById('roleSelect');
+
+            if (status === 'EMPLOYED') {
+                roleSelect.required = true;
+            } else if (status === 'UNEMPLOYED') {
+                if (exp === 'Fresher') {
+                    roleSelect.required = true;
+                } else {
+                    roleSelect.required = false;
+                }
+            } else {
+                roleSelect.required = false;
+            }
+        }
+
+        statusSelect.addEventListener('change', updateFields);
+        experienceSelect.addEventListener('change', handleRoleMandatory);
+
+        // Initial trigger
+        if (statusSelect.value) {
+            updateFields();
+            // Restore saved value if any (Thymeleaf handles field binding, but we need to match JS options)
+            const savedExp = "[[${profile.experience}]]";
+            if (savedExp) experienceSelect.value = savedExp;
+        }
+    </script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

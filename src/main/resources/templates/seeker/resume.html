@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Resume | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .resume-form {
+            max-width: 800px;
+        }
+
+        .section-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('seeker')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container">
+        <div th:replace="~{common/fragments :: seeker-sidebar('resume')}"></div>
+
+        <main class="main-content">
+            <div th:if="${param.success}" class="alert alert-success"
+                style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                <span th:if="${param.success[0] == 'resume_deleted'}">Resume deleted successfully!</span>
+                <span th:unless="${param.success[0] == 'resume_deleted'}">Resume and profile updated
+                    successfully!</span>
+            </div>
+            <div th:if="${param.error}" class="alert alert-error"
+                style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                <p th:text="${param.error[0]}">Error message</p>
+            </div>
+
+            <form th:action="@{/seeker/resume}" th:object="${resume}" method="post" enctype="multipart/form-data"
+                class="resume-form" autocomplete="off">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="section-card">
+                    <h3 class="section-header">Professional Objective</h3>
+                    <div class="form-group">
+                        <textarea th:field="*{objective}" class="form-control"
+                            placeholder="Brief summary of your career goals..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-header">Education</h3>
+                    <div class="form-group">
+                        <textarea th:field="*{education}" class="form-control"
+                            placeholder="Degrees, institutions, and dates..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-header">Work Experience</h3>
+                    <div class="form-group">
+                        <textarea th:field="*{experience}" class="form-control"
+                            placeholder="Previous roles, companies, and achievements..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-header">Skills & Competencies</h3>
+                    <div class="form-group">
+                        <textarea th:field="*{skills}" class="form-control"
+                            placeholder="List your technical and soft skills..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-header">Projects</h3>
+                    <div class="form-group">
+                        <textarea th:field="*{projects}" class="form-control"
+                            placeholder="Notable projects, links, and impact..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-header">Certifications</h3>
+                    <div class="form-group">
+                        <textarea th:field="*{certifications}" class="form-control"
+                            placeholder="Professional certifications and licenses..."></textarea>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3 class="section-header">Upload Formatted Resume (PDF/DOCX)</h3>
+                    <div class="form-group">
+                        <input type="file" name="resumeFile" class="form-control" accept=".pdf,.docx">
+
+                        <div th:if="${resume.resumePath != null}"
+                            style="margin-top: 1.5rem; padding: 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div
+                                    style="width: 45px; height: 45px; background: rgba(99, 102, 241, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    📄
+                                </div>
+                                <div>
+                                    <div style="color: white; font-weight: 600; font-size: 0.95rem;"
+                                        th:text="${resume.originalFilename != null ? resume.originalFilename : 'Formatted Resume'}">
+                                        resume.pdf</div>
+                                    <div style="color: #94a3b8; font-size: 0.8rem;">Uploaded formatted resume</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 1rem;">
+                                <a th:href="${resume.resumePath}" target="_blank" class="btn"
+                                    style="width: auto; padding: 0.6rem 1.2rem; font-size: 0.85rem; background: var(--success); color: white; border: none;">View
+                                    Current</a>
+
+                                <button type="button" class="btn"
+                                    onclick="if(confirm('Are you sure you want to delete your uploaded resume?')) { document.getElementById('delete-resume-form').submit(); }"
+                                    style="width: auto; padding: 0.6rem 1.2rem; font-size: 0.85rem; background: #ef4444; color: white; border: none;">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1.5rem; margin-bottom: 5rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 2;">Save Profiles & Resume</button>
+                    <a href="/seeker/dashboard" class="btn btn-outline"
+                        style="flex: 1; border: 1px solid var(--glass-border); text-align: center; line-height: 1; padding: 0.8rem; text-decoration: none; color: white;">Cancel</a>
+                </div>
+            </form>
+
+            <!-- Hidden form for deletion -->
+            <form id="delete-resume-form" th:action="@{/seeker/resume/delete}" method="post" style="display: none;">
+            </form>
+        </main>
+    </div>
+    <script>
+        document.querySelector('.resume-form').addEventListener('submit', function () {
+            setTimeout(() => {
+                this.querySelectorAll('input[type=text], textarea').forEach(el => el.value = '');
+            }, 100);
+        });
+    </script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
+
+</html>

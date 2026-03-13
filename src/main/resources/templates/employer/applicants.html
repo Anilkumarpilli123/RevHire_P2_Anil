@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Applicants | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .applicant-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            margin-top: 20px;
+        }
+
+        .applicant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .applicant-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .status-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-applied {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary);
+        }
+
+        .status-shortlisted {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .status-rejected {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--error);
+        }
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container">
+        <div th:replace="~{common/fragments :: employer-sidebar('applicants')}"></div>
+
+        <main class="main-content">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2.5rem;">
+                <div>
+                    <h1 th:text="'Applicants: ' + ${job.title}">Applicants: Senior Engineer</h1>
+                    <p style="color: #94a3b8; margin-top: 0.5rem;" th:text="${job.location + ' • ' + job.jobType}">
+                        Location • Type</p>
+                </div>
+                <a href="/employer/dashboard" class="btn btn-outline" style="width: auto;">Back to Dashboard</a>
+            </div>
+
+            <div th:if="${param.error}" class="alert alert-error"
+                style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                <p th:if="${param.error[0] == 'no_selection'}">Please select at least one applicant for bulk actions.
+                </p>
+            </div>
+
+            <div th:if="${param.success}" class="alert alert-success"
+                style="background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.2); color: #22c55e; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                <p th:if="${param.success[0] == 'status_updated'}">Applicant status updated successfully.</p>
+                <p th:if="${param.success[0] == 'bulk_updated'}">Bulk status update completed.</p>
+            </div>
+
+            <div th:if="${!applications.empty}"
+                style="margin-bottom: 2rem; display: flex; justify-content: flex-end; gap: 1rem; align-items: center;"
+                id="bulkBar">
+                <span style="color: #94a3b8; font-size: 0.9rem;">Selected: <span id="selectCount">0</span></span>
+                <form th:action="@{/employer/applications/bulk-status}" method="post" id="bulkForm"
+                    style="display: flex; gap: 1rem; align-items: center;">
+                    <input type="hidden" name="jobId" th:value="${job.id}">
+                    <select name="status" class="form-control"
+                        style="width: auto; background-image: linear-gradient(to right, var(--primary), var(--secondary)); color: white;">
+                        <option value="SHORTLISTED">Shortlist Selected</option>
+                        <option value="REJECTED">Reject Selected</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Apply Bulk Action</button>
+                </form>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="glass-card p-4 mb-4">
+                <form th:action="@{/employer/applicants/{jobId}(jobId=${job.id})}" method="get" class="dashboard-grid"
+                    style="gap: 1.5rem; margin-top: 0; grid-template-columns: repeat(4, 1fr);">
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Applicant
+                            Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Search by name..."
+                            th:value="${param.name}">
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Status</label>
+                        <select name="status" class="form-control">
+                            <option value="">All Statuses</option>
+                            <option value="APPLIED" th:selected="${param.status == 'APPLIED'}">Applied</option>
+                            <option value="UNDER_REVIEW" th:selected="${param.status == 'UNDER_REVIEW'}">Under Review
+                            </option>
+                            <option value="SHORTLISTED" th:selected="${param.status == 'SHORTLISTED'}">Shortlisted
+                            </option>
+                            <option value="REJECTED" th:selected="${param.status == 'REJECTED'}">Rejected</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label
+                            style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: #94a3b8;">Experience</label>
+                        <input type="text" name="experience" class="form-control" placeholder="e.g. 5 years"
+                            th:value="${param.experience}">
+                    </div>
+                    <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; height: 45px;">Filter</button>
+                    </div>
+                </form>
+            </div>
+
+            <div th:each="app : ${applications}" class="applicant-card">
+                <div class="applicant-header">
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="checkbox" name="applicationIds" th:value="${app.id}" class="app-checkbox"
+                            form="bulkForm" style="width: 20px; height: 20px;">
+                        <div>
+                            <div class="applicant-name" th:text="${app.jobSeeker.name}">Alice Johnson</div>
+                            <div style="color: #94a3b8;" th:text="${app.jobSeeker.user.email}">alice@example.com
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status-badge" th:classappend="'status-' + ${app.status.toLowerCase()}"
+                        th:text="${app.status}">Applied</div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h5 style="color: var(--primary); margin-bottom: 0.5rem;">Cover Letter excerpt:</h5>
+                    <p style="font-size: 0.95rem; color: #cbd5e1;" th:text="${app.coverLetter}">Professional with 5
+                        years experience...</p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <a th:if="${app.jobSeeker.resume != null and app.jobSeeker.resume.resumePath != null}"
+                        th:href="${app.jobSeeker.resume.resumePath}" target="_blank" class="btn btn-outline"
+                        style="width: auto; border: 1px solid var(--glass-border); display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-file-pdf"></i> View Full Resume
+                    </a>
+
+                    <span th:if="${app.jobSeeker.resume == null or app.jobSeeker.resume.resumePath == null}"
+                        style="color: #94a3b8; font-size: 0.9rem; font-style: italic;">No formatted resume
+                        uploaded</span>
+
+                    <!-- Separate forms for individual actions -->
+                    <form th:id="'shortlist-form-' + ${app.id}"
+                        th:action="@{'/employer/applications/' + ${app.id} + '/status'}" method="post">
+                        <input type="hidden" name="status" value="SHORTLISTED">
+                    </form>
+                    <form th:id="'reject-form-' + ${app.id}"
+                        th:action="@{'/employer/applications/' + ${app.id} + '/status'}" method="post">
+                        <input type="hidden" name="status" value="REJECTED">
+                    </form>
+
+                    <button type="submit" th:form="'shortlist-form-' + ${app.id}" class="btn btn-primary"
+                        style="width: auto; background: rgba(16, 185, 129, 0.4); border: 1px solid var(--success);">Shortlist</button>
+
+                    <button type="submit" th:form="'reject-form-' + ${app.id}" class="btn btn-outline"
+                        style="width: auto; border: 1px solid var(--error); color: var(--error);">Reject</button>
+                </div>
+            </div>
+
+            <div th:if="${applications.empty}" class="glass-container"
+                style="text-align: center; padding: 5rem; border-radius: 20px;">
+                <div style="font-size: 3rem; margin-bottom: 1.5rem;">📋</div>
+                <h3>No Applicants Yet</h3>
+                <p style="color: #94a3b8; margin-top: 1rem;">Once candidates apply for this position, they will appear
+                    here.</p>
+                <a href="/employer/dashboard" class="btn btn-primary" style="width: auto; margin-top: 2rem;">Return to
+                    Dashboard</a>
+            </div>
+
+            <script>
+                document.querySelectorAll('.app-checkbox').forEach(cb => {
+                    cb.addEventListener('change', () => {
+                        const count = document.querySelectorAll('.app-checkbox:checked').length;
+                        document.getElementById('selectCount').innerText = count;
+                    });
+                });
+            </script>
+        </main>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

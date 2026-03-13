@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Using global profile styles from style.css */
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+
+    <div class="container">
+        <div th:replace="~{common/fragments :: employer-sidebar('profile')}"></div>
+
+        <main class="main-content">
+            <div class="profile-edit-container">
+                <header
+                    style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <a href="/employer/profile"
+                        style="color: #94a3b8; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-arrow-left"></i> Back to Profile
+                    </a>
+                </header>
+
+                <div class="glass-container">
+                    <h1 style="margin-bottom: 0.5rem;">Edit Profile</h1>
+                    <p style="color: #94a3b8; margin-bottom: 2.5rem;">Update your personal and company details.</p>
+
+                    <div th:if="${param.message != null and param.message[0] == 'complete_profile_first'}"
+                        style="background: rgba(249, 115, 22, 0.1); border: 1px solid rgba(249, 115, 22, 0.3); color: #fb923c; padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <i class="fas fa-info-circle"></i> Please complete your profile details first to access the
+                        dashboard.
+                    </div>
+
+                    <form th:action="@{/employer/profile}" method="post">
+                        <!-- Personal Details Section -->
+                        <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-user-tie" style="color: var(--primary);"></i> Personal Details
+                        </h3>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" name="personalName" th:value="${profile.name}" class="form-control"
+                                    placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Professional Role</label>
+                                <input type="text" name="jobRole" th:value="${profile.jobRole}" class="form-control"
+                                    placeholder="e.g. HR Manager, Tech Lead">
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" name="personalPhone" th:value="${profile.phone}" class="form-control"
+                                    placeholder="e.g. +91 9876543210">
+                            </div>
+                            <div class="form-group">
+                                <label>Personal Location</label>
+                                <input type="text" name="personalLocation" th:value="${profile.location}"
+                                    class="form-control" placeholder="e.g. Hyderabad, India">
+                            </div>
+                        </div>
+
+                        <!-- Company Details Section -->
+                        <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-building" style="color: var(--secondary);"></i> Company Information
+                        </h3>
+
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" name="companyName" th:value="${profile.company?.name}"
+                                class="form-control" required placeholder="Your organization name">
+                        </div>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                            <div class="form-group">
+                                <label>Industry</label>
+                                <input type="text" name="companyIndustry" th:value="${profile.company?.industry}"
+                                    class="form-control" placeholder="e.g. Technology, Finance">
+                            </div>
+                            <div class="form-group">
+                                <label>Company Website</label>
+                                <input type="url" name="companyWebsite" th:value="${profile.company?.website}"
+                                    class="form-control" placeholder="https://example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Office Location</label>
+                                <input type="text" name="companyLocation" th:value="${profile.company?.location}"
+                                    class="form-control" placeholder="e.g. San Francisco, US">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Company Mission & Culture</label>
+                            <textarea name="companyDescription" th:text="${profile.company?.description}"
+                                class="form-control"
+                                placeholder="Tell us about your company culture, mission, and vision..."
+                                style="min-height: 120px; resize: vertical;"></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 1.5rem; margin-top: 3rem;">
+                            <button type="submit" class="btn btn-primary" style="flex: 2; padding: 1rem;">Save
+                                Changes</button>
+                            <a href="/employer/profile" class="btn"
+                                style="flex: 1; background: rgba(255,255,255,0.05); text-align: center; text-decoration: none; color: white; display: flex; align-items: center; justify-content: center;">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function () {
+            setTimeout(() => {
+                this.querySelectorAll('input[type=text], input[type=url], textarea').forEach(el => el.value = '');
+            }, 100);
+        });
+    </script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

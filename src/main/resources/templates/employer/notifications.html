@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Notifications | RevHire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* No local layout overrides */
+    </style>
+</head>
+
+<body>
+    <div th:replace="~{common/fragments :: mobile-header('employer')}"></div>
+    <div th:replace="~{common/fragments :: sidebar-overlay}"></div>
+    <div class="container">
+        <div th:replace="~{common/fragments :: employer-sidebar('notifications')}"></div>
+
+        <main class="main-content">
+            <header style="margin-bottom: 3rem;">
+                <h1>Employer Notifications</h1>
+                <p style="color: #94a3b8;">Manage applications and important updates.</p>
+            </header>
+
+            <div class="notifications-list">
+                <div th:each="note : ${notifications}"
+                    th:class="${'notification-item' + (note.isRead ? '' : ' unread')}"
+                    th:onclick="'markAsRead(' + ${note.id} + ', this)'">
+                    <div class="notification-content" th:text="${note.message}">Notification message here</div>
+                    <span class="notification-time"
+                        th:text="${#temporals.format(note.createdAt, 'dd MMM yyyy, HH:mm')}">Time</span>
+                </div>
+
+                <div th:if="${notifications.empty}" class="notification-empty">
+                    <p>No notifications yet.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script th:inline="javascript">
+        async function markAsRead(id, element) {
+            if (!element.classList.contains('unread')) return;
+
+            try {
+                const response = await fetch(`/api/notifications/${id}/read`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    element.classList.remove('unread');
+                    const badges = document.querySelectorAll('.unread-badge');
+                    badges.forEach(badge => {
+                        let count = parseInt(badge.innerText);
+                        if (count > 1) {
+                            badge.innerText = count - 1;
+                        } else {
+                            badge.remove();
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error marking notification as read:', error);
+            }
+        }
+    </script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>
