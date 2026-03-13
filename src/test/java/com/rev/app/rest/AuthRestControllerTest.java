@@ -62,7 +62,7 @@ class AuthRestControllerTest {
     @Test
     @WithMockUser
     void register_Success() throws Exception {
-        SignupRequest request = new SignupRequest("test@e.com", "pass", "Name", "seeker");
+        SignupRequest request = new SignupRequest("test@e.com", "Password@123", "Name", "seeker");
         User user = User.builder().email("test@e.com").role("seeker").build();
         when(authService.registerUser(any(SignupRequest.class))).thenReturn(user);
 
