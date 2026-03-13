@@ -60,7 +60,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable for development, enable with proper tokens for production
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/login", "/register", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers("/", "/login", "/register", "/forgot-password", "/reset-password", "/css/**",
+                                "/js/**", "/images/**")
+                        .permitAll()
                         .requestMatchers("/seeker/**").hasRole("SEEKER")
                         .requestMatchers("/employer/**").hasRole("EMPLOYER")
                         .anyRequest().authenticated())

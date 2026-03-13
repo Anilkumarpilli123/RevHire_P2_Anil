@@ -55,4 +55,59 @@ public class AuthController {
             return "register";
         }
     }
+
+    @GetMapping("/forgot-password")
+    public String forgotPasswordForm(Model model) {
+        model.addAttribute("forgotPasswordRequest", new com.rev.app.dto.ForgotPasswordRequest());
+        return "forgot-password";
+    }
+
+    @PostMapping("/forgot-password")
+    public String processForgotPassword(
+            @Valid @ModelAttribute("forgotPasswordRequest") com.rev.app.dto.ForgotPasswordRequest forgotPasswordRequest,
+            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", result.getAllErrors().get(0).getDefaultMessage());
+            return "forgot-password";
+        }
+        try {
+            authService.initiatePasswordReset(forgotPasswordRequest.getEmail());
+            model.addAttribute("message", "Password reset link has been sent to your email.");
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "forgot-password";
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPasswordForm(String token, Model model) {
+        if (!authService.validatePasswordResetToken(token)) {
+            model.addAttribute("error", "Invalid or expired reset token.");
+            model.addAttribute("forgotPasswordRequest", new com.rev.app.dto.ForgotPasswordRequest());
+            return "forgot-password";
+        }
+        com.rev.app.dto.ResetPasswordRequest request = new com.rev.app.dto.ResetPasswordRequest();
+        request.setToken(token);
+        model.addAttribute("resetPasswordRequest", request);
+        return "reset-password";
+    }
+
+    @PostMapping("/reset-password")
+    public String processResetPassword(
+            @Valid @ModelAttribute("resetPasswordRequest") com.rev.app.dto.ResetPasswordRequest resetRequest,
+            BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("error", result.getAllErrors().get(0).getDefaultMessage());
+            model.addAttribute("token", resetRequest.getToken());
+            return "reset-password";
+        }
+        try {
+            authService.resetPassword(resetRequest.getToken(), resetRequest.getNewPassword());
+            return "redirect:/login?resetSuccess=true";
+        } catch (RuntimeException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("token", resetRequest.getToken());
+            return "reset-password";
+        }
+    }
 }

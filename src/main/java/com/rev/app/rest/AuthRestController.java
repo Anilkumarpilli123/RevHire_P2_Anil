@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
-    public class AuthRestController {
+public class AuthRestController {
 
     @Autowired
     private AuthService authService;
@@ -29,5 +29,17 @@ import org.springframework.web.bind.annotation.*;
     public ResponseEntity<ApiResponse<UserDto>> registerUser(@Valid @RequestBody SignupRequest signupRequest) {
         User user = authService.registerUser(signupRequest);
         return ResponseEntity.ok(ApiResponse.success("User registered successfully", userMapper.toDto(user)));
+    }
+
+    @PostMapping("/auth/forgot-password")
+    public ResponseEntity<ApiResponse<String>> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        authService.initiatePasswordReset(request.getEmail());
+        return ResponseEntity.ok(ApiResponse.success("Password reset link sent to your email", null));
+    }
+
+    @PostMapping("/auth/reset-password")
+    public ResponseEntity<ApiResponse<String>> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request.getToken(), request.getNewPassword());
+        return ResponseEntity.ok(ApiResponse.success("Password reset successful", null));
     }
 }

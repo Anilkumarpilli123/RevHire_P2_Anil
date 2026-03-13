@@ -11,6 +11,7 @@
     <groupId>com.rev.app</groupId>
     <artifactId>RevHire_P2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>RevHire_P2</name>
     <description>RevHire_P2</description>
     <url/>
@@ -140,6 +141,14 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
         </dependency>
     </dependencies>
 

@@ -9,4 +9,10 @@ public interface AuthService {
     JwtResponse authenticateUser(LoginRequest loginRequest);
 
     User registerUser(SignupRequest signupRequest);
+
+    void initiatePasswordReset(String email);
+
+    boolean validatePasswordResetToken(String token);
+
+    void resetPassword(String token, String newPassword);
 }
